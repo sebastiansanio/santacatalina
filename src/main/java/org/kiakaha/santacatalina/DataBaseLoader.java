@@ -10,24 +10,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataBaseLoader implements CommandLineRunner {
  
-    private final EmployeeRepository employeeRepository;
     private final ProductRepository productRepository;
  
     @Autowired
-    public DataBaseLoader(EmployeeRepository employeeRepository,ProductRepository productRepository) {
-        this.employeeRepository = employeeRepository;
+    public DataBaseLoader(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
  
     @Override
     public void run(String... strings) throws Exception {
-        this.employeeRepository.save(new Employee("Joe Biden", 45, 5));
-        this.employeeRepository.save(new Employee("President Obama", 54, 8));
-        this.employeeRepository.save(new Employee("Crystal Mac", 34, 12));
-        this.employeeRepository.save(new Employee("James Henry", 33, 2));
-        this.productRepository.save(new Product("Tarta jamon y queso", BigDecimal.valueOf(60.00) , " ",true));
-        this.productRepository.save(new Product("Albondigas", BigDecimal.valueOf(80.00), "",true));
-        this.productRepository.save(new Product("Fideos", BigDecimal.valueOf(90.00), "",true));
-        this.productRepository.save(new Product("Tomates", BigDecimal.valueOf(40.00), "",true));
+        this.productRepository.save(new Product("Tarta jamon y queso", BigDecimal.valueOf(60.00) , " ",true,false));
+        this.productRepository.save(new Product("Albondigas", BigDecimal.valueOf(80.00), "",true,false));
+        this.productRepository.save(new Product("Fideos", BigDecimal.valueOf(90.00), "",true,false));
+        this.productRepository.save(new Product("Tomates", BigDecimal.valueOf(40.00), "",true,false));
     }
 }

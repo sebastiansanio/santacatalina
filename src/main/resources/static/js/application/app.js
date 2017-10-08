@@ -11,12 +11,11 @@ var Navbar = React.createClass({
                             <span className="icon-bar"></span>
                             <span className="icon-bar"></span>
                         </button>
-                        <a className="navbar-brand" href="#">Hello World!</a>
+                        <a className="navbar-brand" href="#">Santa Catalina</a>
                     </div>
                     <div id="navbar" className="navbar-collapse collapse">
                         <ul className="nav navbar-nav">
                             <li className="active"><a href="/#/about">About</a></li>
-                            <li className=""><a href="/#/employee">People</a></li>
                             <li className=""><a href="/#/product">Productos</a></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
@@ -75,11 +74,10 @@ var Footer = React.createClass({
             <footer>
                 <div className="row">
                     <div className="col-md-6 text-left">
-                        <p>&copy; Nobody 2015</p>
+                        <p>&copy; Kia Kaha 2017</p>
                     </div>
                     <div className="col-md-6 text-right">
-                        <a href="https://github.com/laran/spring-data-rest-mvc-react">Project page on Github</a> | <a
-                            href="/#/terms">Terms of Service</a> | <a href="/#/privacy">Privacy Policy</a>
+                        <a href="/#/terms">Terms of Service</a> | <a href="/#/privacy">Privacy Policy</a>
                     </div>
                 </div>
             </footer>
@@ -105,88 +103,10 @@ var Layout = React.createClass({
     }
 });
 
-var Employee = React.createClass({
-  getInitialState: function() {
-    return {display: true };
-  },
-  handleDelete() {
-    var self = this;
-    $.ajax({
-      url: self.props.employee._links.self.href,
-      type: 'DELETE',
-      success: function(result) {
-        self.setState({display: false});
-      },
-      error: function(xhr, ajaxOptions, thrownError) {
-        toastr.error(xhr.responseJSON.message);
-      }
-    });
-  },
-  render: function() {
-    if (this.state.display==false) return null;
-    else return (
-      <tr>
-        <td>{this.props.employee.name}</td>
-        <td>{this.props.employee.age}</td>
-        <td>{this.props.employee.years}</td>
-        <td>
-          <button className="btn btn-info" onClick={this.handleDelete}>Delete</button>
-        </td>
-      </tr>
-    );
-  }
-}); 
-
-var EmployeeTable = React.createClass({
-  render: function() {
-    var rows = [];
-    this.props.employees.forEach(function(employee) {
-      rows.push(<Employee employee={employee} />);
-    });
-    return (
-     <div className="container">
-  <table className="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Age</th>
-        <th>Years</th>
-      </tr>
-    </thead>
-    <tbody>{rows}</tbody>
-  </table>
-</div>);
-  }
-});
-
-var App = React.createClass({
- 
-  loadEmployeesFromServer: function () {
-    var self = this;
-    $.ajax({
-      url: "http://localhost:8080/api/employees"
-    }).then(function (data) {
-      self.setState({employees: data._embedded.employees});
-    });
-  },
- 
-  getInitialState: function () {
-    return {employees: []};
-  },
- 
-  componentDidMount: function () {
-	    this.loadEmployeesFromServer();
-  },
- 
-  render() {
-	    return ( <EmployeeTable employees={this.state.employees}/> );
-	  }
-});
-
 	    // Arranco la parte de productos
 var AbmProduct = React.createClass({
 	 
-	  loadEmployeesFromServer: function () {
+	  loadProductsFromServer: function () {
 	    var self = this;
 	    $.ajax({
 	      url: "http://localhost:8080/api/products"
@@ -200,7 +120,7 @@ var AbmProduct = React.createClass({
 	  },
 	 
 	  componentDidMount: function () {
-		    this.loadEmployeesFromServer();
+		    this.loadProductsFromServer();
 	  },
 	 
 	  render() {
@@ -216,7 +136,7 @@ var ProductList = React.createClass({
 			    var self = this;
 			    alert(self.props.name);
 			    $.ajax({
-			      url: self.props.employee._links.self.href,
+			      url: self.props.product._links.self.href,
 			      type: 'GET',
 			      success: function(result) {
 			        self.setState({display: false});
@@ -311,7 +231,6 @@ var routes = (
 		// chain. This is important.
 	    <Route name="root" handler={Layout} path="/">
 	        <Route handler={About} path="about"/>
-	        <Route handler={App} path="employee"/>
 	        <Route handler={AbmProduct} path="product"/>
 	        <Route handler={TermsOfService} path="terms"/>
 	        <Route handler={PrivacyPolicy} path="privacy"/>

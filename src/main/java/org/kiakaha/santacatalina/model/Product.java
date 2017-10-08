@@ -1,35 +1,49 @@
 package org.kiakaha.santacatalina.model;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
 @Data
 @Entity
 public class Product {
-	
-	private @Id @GeneratedValue Long id;
-    private String name;
-   
+
+	@Id
+	@GeneratedValue
+	private Long id;
+
+	private String name;
 
 	private BigDecimal price;
-    private String description;
-    private boolean status;
- 
-    public Product() {}
- 
-    public Product(String name, BigDecimal price, String description, boolean status) {
-        this.name = name;
-        this.setPrice(price);
-        this.description = description;
-        this.status = status;
-    }
-    
-    public Long getId() {
+	private String description;
+	
+	@ManyToOne
+	private Category category;
+
+	private boolean deleted;
+	private boolean active;
+
+	private byte[] image;
+	private Date dateCreated;
+	public Product() {
+	}
+
+	public Product(String name, BigDecimal price, String description, boolean active, boolean deleted) {
+		this.name = name;
+		this.price = price;
+		this.description = description;
+		this.active = active;
+		this.deleted = deleted;
+
+	}
+
+	public Long getId() {
 		return id;
 	}
 
@@ -53,19 +67,51 @@ public class Product {
 		this.description = description;
 	}
 
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
 	public BigDecimal getPrice() {
 		return price;
 	}
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public Date getDateCreated() {
+		return dateCreated;
+	}
+
+	public void setDateCreated(Date dateCreated) {
+		this.dateCreated = dateCreated;
 	}
 }
