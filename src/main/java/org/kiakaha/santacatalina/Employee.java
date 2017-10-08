@@ -1,4 +1,4 @@
-package santacatalina.springBoot;
+package org.kiakaha.santacatalina;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

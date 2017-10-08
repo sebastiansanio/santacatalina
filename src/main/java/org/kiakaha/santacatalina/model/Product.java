@@ -1,4 +1,4 @@
-package santacatalina.springBoot;
+package org.kiakaha.santacatalina.model;
 
 import java.math.BigDecimal;
 
@@ -16,15 +16,15 @@ public class Product {
     private String name;
    
 
-	private Double price;
+	private BigDecimal price;
     private String description;
     private boolean status;
  
-    private Product() {}
+    public Product() {}
  
-    public Product(String name, Double price, String description, boolean status) {
+    public Product(String name, BigDecimal price, String description, boolean status) {
         this.name = name;
-        this.price = price;
+        this.setPrice(price);
         this.description = description;
         this.status = status;
     }
@@ -45,14 +45,6 @@ public class Product {
 		this.name = name;
 	}
 
-	public Double getPrice() {
-		return price;
-	}
-
-	public void setPrice(Double price) {
-		this.price = price;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -67,5 +59,13 @@ public class Product {
 
 	public void setStatus(boolean status) {
 		this.status = status;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
 	}
 }
