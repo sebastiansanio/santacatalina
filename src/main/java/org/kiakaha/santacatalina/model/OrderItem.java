@@ -16,6 +16,7 @@ public class OrderItem {
 	@Id
 	@GeneratedValue
 	private Long id;
+	@ManyToOne
 	private Product product;
 	@ManyToOne
 	private Order order;
