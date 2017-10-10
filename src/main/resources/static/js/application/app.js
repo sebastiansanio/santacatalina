@@ -129,7 +129,6 @@ var App = React.createClass({
  
     // render the component based on current or selected mode
     render: function(){
- 		
         var modeComponent =
             <ReadProductsComponent
             changeAppMode={this.changeAppMode} />;
