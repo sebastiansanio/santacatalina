@@ -57,10 +57,18 @@ window.UpdateProductComponent = React.createClass({
 	        type: "PUT",
 	        url: "http://localhost:8080/api/product",
 	        contentType: "application/json",
-	        data: JSON.stringify(form_data)
+	        data: JSON.stringify(form_data),
+	        success : function(response) {
+		        this.setState({successUpdate: "El producto fue actualizado correctamente"});
+		    
+	        }.bind(this),
+	        error: function(xhr, resp, text){
+	            console.log(xhr, resp, text);
+	        }
 	    });
+	    
+	    event.preventDefault();
 	 
-	    e.preventDefault();
 	},
 	 
 	render: function() {
@@ -73,9 +81,9 @@ window.UpdateProductComponent = React.createClass({
 	    return (
 	        <div>
 	            {
-	                this.state.successUpdate == "Product was updated." ?
+	                this.state.successUpdate == "El producto fue actualizado correctamente" ?
 	                    <div className='alert alert-success'>
-	                        Product was updated.
+	                			El producto fue actualizado correctamente
 	                    </div>
 	                : null
 	            }

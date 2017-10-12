@@ -37,12 +37,19 @@ window.CreateProductComponent = React.createClass({
 	        type: "POST",
 	        url: "http://localhost:8080/api/product",
 	        contentType: "application/json",
-	        data: JSON.stringify(form_data)
+	        data: JSON.stringify(form_data),
+	        success : function(response) {
+		        this.setState({successCreation: "El producto fue creado correctamente"});
+		        this.setState({name: ""});
+	            this.setState({description: ""});
+	            this.setState({price: ""});
+		    
+	        }.bind(this),
+	        error: function(xhr, resp, text){
+	            console.log(xhr, resp, text);
+	        }
 	    });
-	 
-	    //TODO:LLamar al metodo que graba usando el form data de arriba
-	 
-	    e.preventDefault();
+	    event.preventDefault();
 	},
 	render: function() {
 		 
@@ -50,9 +57,9 @@ window.CreateProductComponent = React.createClass({
 	    <div>
 	        {
 	 
-	            this.state.successCreation == "Product was created." ?
+	            this.state.successCreation == "El producto fue creado correctamente" ?
 	                <div className='alert alert-success'>
-	                    Product was saved.
+	            El producto fue creado correctamente
 	                </div>
 	            : null
 	        }
