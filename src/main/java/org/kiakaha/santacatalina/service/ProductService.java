@@ -22,7 +22,7 @@ public class ProductService {
  
 	public Product save(Product product) {
 		if (product.getId() != null && productRepository.exists(product.getId())) {
-			throw new EntityExistsException("There is already existing entity with such ID in the database.");
+			throw new EntityExistsException("Ya existe el producto en la base");
 		}
  
 		return productRepository.save(product);
@@ -30,7 +30,7 @@ public class ProductService {
  
 	public Product update(Product product) {
 		if (product.getId() != null && !productRepository.exists(product.getId())) {
-			throw new EntityNotFoundException("There is no entity with such ID in the database.");
+			throw new EntityNotFoundException("El producto no existe en la base");
 		}
  
 		return productRepository.save(product);
