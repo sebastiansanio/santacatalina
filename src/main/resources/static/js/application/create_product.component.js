@@ -33,6 +33,7 @@ window.CreateProductComponent = React.createClass({
 	        price: this.state.price,
 	    };
 	    
+	    
 	    $.ajax({
 	        type: "POST",
 	        url: "http://localhost:8080/api/product",
@@ -79,7 +80,7 @@ window.CreateProductComponent = React.createClass({
 	        </a>
 	 
 	 
-	        <form onSubmit={this.onSave}>
+	        <form>
 	            <table className='table table-bordered table-hover'>
 	            <tbody>
 	                <tr>
