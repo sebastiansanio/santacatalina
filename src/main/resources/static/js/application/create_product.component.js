@@ -31,8 +31,14 @@ window.CreateProductComponent = React.createClass({
 	        name: this.state.name,
 	        description: this.state.description,
 	        price: this.state.price,
-	        category_id: this.state.selectedCategoryId
 	    };
+	    
+	    $.ajax({
+	        type: "POST",
+	        url: "http://localhost:8080/api/product",
+	        contentType: "application/json",
+	        data: JSON.stringify(form_data)
+	    });
 	 
 	    //TODO:LLamar al metodo que graba usando el form data de arriba
 	 

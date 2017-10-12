@@ -13,17 +13,10 @@ window.UpdateProductComponent = React.createClass({
 	 
 	componentDidMount: function(){
 	 
-	    this.serverRequestCat = $.get("http://localhost/api/category/read.php",
-	        function (categories) {
-	            this.setState({
-	                categories: categories.records
-	            });
-	        }.bind(this));
-	 
-	    var productId = this.props.productId;
-	    this.serverRequestProd = $.get("http://localhost/api/product/read_one.php?id=" + productId,
-	        function (product) {
-	            this.setState({selectedCategoryId: product.category_id});
+		var productId = this.props.productId;
+	    
+	    
+	    $.getJSON("http://localhost:8080/api/product/"+productId, function( product ) {
 	            this.setState({id: product.id});
 	            this.setState({name: product.name});
 	            this.setState({description: product.description});
@@ -33,10 +26,6 @@ window.UpdateProductComponent = React.createClass({
 	    $('.page-header h1').text('Update product');
 	},
 	 
-	componentWillUnmount: function() {
-	    this.serverRequestCat.abort();
-	    this.serverRequestProd.abort();
-	},
 	
 	onCategoryChange: function(e){
 	    this.setState({selectedCategoryId: e.target.value});
@@ -63,8 +52,13 @@ window.UpdateProductComponent = React.createClass({
 	        price: this.state.price,
 	        category_id: this.state.selectedCategoryId
 	    };
-	 
-	    //TODO:LLamar al metodo que actualiza
+	    
+	    $.ajax({
+	        type: "PUT",
+	        url: "http://localhost:8080/api/product",
+	        contentType: "application/json",
+	        data: JSON.stringify(form_data)
+	    });
 	 
 	    e.preventDefault();
 	},

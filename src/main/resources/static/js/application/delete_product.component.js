@@ -6,7 +6,12 @@ window.DeleteProductComponent = React.createClass({
 	 
 	    var productId = this.props.productId;
 	 
-	       //TODO:LLamar al metodo que elimina
+	        $.ajax({
+	        type: "DELETE",
+	        url: "http://localhost:8080/api/product/"+productId,
+	        contentType: "application/json",
+	        
+	    });
 	},
 	render: function(){
 		 

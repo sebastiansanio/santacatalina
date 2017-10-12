@@ -12,10 +12,9 @@ window.ReadOneProductComponent = React.createClass({
 	componentDidMount: function(){
 	 
 	    var productId = this.props.productId;
-	 
-	    this.serverRequestProd = $.get("http://localhost/api/product/read_one.php?id=" + productId,
-	        function (product) {
-	            this.setState({category_name: product.category_name});
+	    
+	    
+	    $.getJSON("http://localhost:8080/api/product/"+productId, function( product ) {
 	            this.setState({id: product.id});
 	            this.setState({name: product.name});
 	            this.setState({description: product.description});
@@ -25,9 +24,6 @@ window.ReadOneProductComponent = React.createClass({
 	    $('.page-header h1').text('Read Product');
 	},
 	 
-	componentWillUnmount: function() {
-	    this.serverRequestProd.abort();
-	},
 	render: function() {
 		 
 	    return (

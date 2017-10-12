@@ -8,9 +8,9 @@ window.ReadProductsComponent = React.createClass({
     loadProductsFromServer: function () {
 	    var self = this;
 	    $.ajax({
-	      url: "http://localhost:8080/api/products"
+	      url: "http://localhost:8080/api/product"
 	    }).then(function (data) {
-	      self.setState({products: data._embedded.products});
+	      self.setState({products: data});
 	    });
 	  },
  
