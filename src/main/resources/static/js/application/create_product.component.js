@@ -47,6 +47,7 @@ window.CreateProductComponent = React.createClass({
 		    
 	        }.bind(this),
 	        error: function(xhr, resp, text){
+	        		this.setState({successCreation: "No se pudo crear el producto"});
 	            console.log(xhr, resp, text);
 	        }
 	    });
@@ -62,14 +63,14 @@ window.CreateProductComponent = React.createClass({
 	                <div className='alert alert-success'>
 	            El producto fue creado correctamente
 	                </div>
-	            : null
+	            :  null
 	        }
 	 
 	        {
 	 
-	            this.state.successCreation == "Unable to create product." ?
+	            this.state.successCreation == "No se pudo crear el producto" ?
 	                <div className='alert alert-danger'>
-	                    Unable to save product. Please try again.
+	                    No se pudo crear el producto
 	                </div>
 	            : null
 	        }

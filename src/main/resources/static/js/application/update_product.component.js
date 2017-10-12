@@ -63,6 +63,7 @@ window.UpdateProductComponent = React.createClass({
 		    
 	        }.bind(this),
 	        error: function(xhr, resp, text){
+	        	this.setState({successUpdate: "No se pudo actualizar el producto"});
 	            console.log(xhr, resp, text);
 	        }
 	    });
@@ -89,9 +90,9 @@ window.UpdateProductComponent = React.createClass({
 	            }
 	 
 	            {
-	                this.state.successUpdate == "Unable to update product." ?
+	                this.state.successUpdate == "No se pudo actualizar el producto" ?
 	                    <div className='alert alert-danger'>
-	                        Unable to update product. Please try again.
+	                       No se pudo actualizar el producto
 	                    </div>
 	                : null
 	            }
