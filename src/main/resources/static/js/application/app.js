@@ -115,6 +115,7 @@ var App = React.createClass({
     getInitialState: function(){
         return {
             currentMode: 'read',
+            name:'',
             productId: null
         };
     },
@@ -126,12 +127,16 @@ var App = React.createClass({
             this.setState({productId: productId});
         }
     },
+    
+    changeName: function(newName){
+        this.setState({name: newName});
+    },
  
     // render the component based on current or selected mode
     render: function(){
         var modeComponent =
             <ReadProductsComponent
-            changeAppMode={this.changeAppMode} />;
+            changeAppMode={this.changeAppMode} name={this.state.name} changeName={this.changeName} />;
  
         switch(this.state.currentMode){
             case 'read':

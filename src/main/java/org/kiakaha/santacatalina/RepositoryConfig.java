@@ -1,5 +1,6 @@
 package org.kiakaha.santacatalina;
 
+import org.kiakaha.santacatalina.model.Category;
 import org.kiakaha.santacatalina.model.Product;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -11,5 +12,6 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Product.class);
+        config.exposeIdsFor(Category.class);
     }
 }

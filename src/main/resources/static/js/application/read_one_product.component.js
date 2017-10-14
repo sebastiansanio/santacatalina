@@ -5,22 +5,52 @@ window.ReadOneProductComponent = React.createClass({
 	        name: '',
 	        description: '',
 	        price: 0,
-	        category_name: ''
+	        urlCategory: '',
+	        category:[]
 	    };
 	},
+	
+	loadCategory: function () {
+ 	 	var self = this;
+ 	 	$.ajax({
+	        type: "GET",
+	        url: this.state.urlCategory,
+	        contentType: "application/json",
+	        success : function(category) {
+	        	 this.setState({
+	        		 category: category
+	 	        });
+	        }.bind(this),
+	        error: function(xhr, resp, text){
+	            console.log(xhr, resp, text);
+	        }
+	    });
+	  },
+	  
+	  loadProduct: function(){
+		  var productId = this.props.productId;
+		    $.ajax({
+		        type: "GET",
+		        url: "http://localhost:8080/api/products/"+productId,
+		        contentType: "application/json",
+		        success : function(product) {
+		        		this.setState({id: product.id});
+		            this.setState({name: product.name});
+		            this.setState({description: product.description});
+		            this.setState({price: product.price});
+		            this.setState({urlCategory: product._links.category.href});
+		            this.loadCategory();
+		        }.bind(this),
+		        error: function(xhr, resp, text){
+		            console.log(xhr, resp, text);
+		        }
+		    });
+	  },
 	 
 	componentDidMount: function(){
 	 
-	    var productId = this.props.productId;
+	    this.loadProduct();
 	    
-	    
-	    $.getJSON("http://localhost:8080/api/product/"+productId, function( product ) {
-	            this.setState({id: product.id});
-	            this.setState({name: product.name});
-	            this.setState({description: product.description});
-	            this.setState({price: product.price});
-	        }.bind(this));
-	 
 	    $('.page-header h1').text('Read Product');
 	},
 	 
@@ -54,7 +84,7 @@ window.ReadOneProductComponent = React.createClass({
 	 
 	                    <tr>
 	                        <td>Category</td>
-	                        <td>{this.state.category_name}</td>
+	                        <td>{this.state.category.name}</td>
 	                    </tr>
 	 
 	                    </tbody>

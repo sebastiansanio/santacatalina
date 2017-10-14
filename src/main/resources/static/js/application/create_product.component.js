@@ -1,12 +1,30 @@
 window.CreateProductComponent = React.createClass({
 	getInitialState: function() {
 	    return {
+	    		categories: [],
 	        selectedCategoryId: -1,
 	        name: '',
 	        description: '',
 	        price: '',
 	        successCreation: null
 	    };
+	},
+	
+	componentDidMount: function() {
+		$.ajax({
+	        type: "GET",
+	        url: "http://localhost:8080/api/categories",
+	        contentType: "application/json",
+	        success : function(categories) {
+	        	 this.setState({
+	 	            categories: categories._embedded.categories
+	 	        });
+	        }.bind(this),
+	        error: function(xhr, resp, text){
+	        		this.setState({successCreation: "No se pudo crear el producto"});
+	            console.log(xhr, resp, text);
+	        }
+	    });
 	},
 	 
 	onCategoryChange: function(e) {
@@ -31,12 +49,13 @@ window.CreateProductComponent = React.createClass({
 	        name: this.state.name,
 	        description: this.state.description,
 	        price: this.state.price,
+	        category: this.state.selectedCategoryId
 	    };
 	    
 	    
 	    $.ajax({
 	        type: "POST",
-	        url: "http://localhost:8080/api/product",
+	        url: "http://localhost:8080/api/products",
 	        contentType: "application/json",
 	        data: JSON.stringify(form_data),
 	        success : function(response) {
@@ -54,6 +73,13 @@ window.CreateProductComponent = React.createClass({
 	    event.preventDefault();
 	},
 	render: function() {
+		
+		// make categories as option for the select tag.
+	    var categoriesOptions = this.state.categories.map(function(category){
+	        return (
+	            <option key={category._links.category.href} value={category._links.category.href}>{category.name}</option>
+	        );
+	    });
 		 
 	    return (
 	    <div>
@@ -121,6 +147,19 @@ window.CreateProductComponent = React.createClass({
 	                        onChange={this.onPriceChange}/>
 	                    </td>
 	                </tr>
+	                
+	                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select
+                        onChange={this.onCategoryChange}
+                        className='form-control'
+                        value={this.state.selectedCategoryId}>
+                        <option value="-1">Select category...</option>
+                        {categoriesOptions}
+                        </select>
+                    </td>
+                </tr>
 	 
 	 
 	                <tr>

@@ -8,7 +8,7 @@ window.DeleteProductComponent = React.createClass({
 	 
 	        $.ajax({
 	        type: "DELETE",
-	        url: "http://localhost:8080/api/product/"+productId,
+	        url: "http://localhost:8080/api/products/"+productId,
 	        contentType: "application/json",
 	        
 	    });

@@ -7,17 +7,25 @@ window.ReadProductsComponent = React.createClass({
     
     loadProductsFromServer: function () {
 	    var self = this;
+	    if(this.props.name == '' ){
+	    		var url = "http://localhost:8080/api/products"
+	    }else{
+	    		var url = "http://localhost:8080/api/products/search/findByNameContainingIgnoreCase?name="+this.props.name
+	    }
 	    $.ajax({
-	      url: "http://localhost:8080/api/product"
+	      url: url
 	    }).then(function (data) {
-	      self.setState({products: data});
+	      self.setState({products: data._embedded.products});
 	    });
 	  },
  
     componentDidMount: function() {
     		this.loadProductsFromServer();
     },
- 
+    
+     componentDidUpdate: function () {
+      this.loadProductsFromServer();
+    },
  
     render: function() {
         // list of products
@@ -27,7 +35,8 @@ window.ReadProductsComponent = React.createClass({
         return (
             <div className='overflow-hidden'>
                 <TopActionsComponent changeAppMode={this.props.changeAppMode} />
- 
+                <SearchFiltered changeAppMode={this.props.changeAppMode} name={this.props.name}  changeName={this.props.changeName} />
+ 				
                 <ProductsTable
                     products={filteredProducts}
                     changeAppMode={this.props.changeAppMode} />

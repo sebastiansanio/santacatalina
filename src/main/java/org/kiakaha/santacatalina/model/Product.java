@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
 @Data
@@ -34,12 +37,13 @@ public class Product {
 	public Product() {
 	}
 
-	public Product(String name, BigDecimal price, String description, boolean active, boolean deleted) {
+	public Product(String name, BigDecimal price, String description, boolean active, boolean deleted,Category category) {
 		this.name = name;
 		this.price = price;
 		this.description = description;
 		this.active = active;
 		this.deleted = deleted;
+		this.category = category;
 
 	}
 

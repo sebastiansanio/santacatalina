@@ -1,5 +1,6 @@
 package org.kiakaha.santacatalina.model;
 
+import java.math.BigDecimal;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -19,6 +20,15 @@ public class Category {
 	private String name;
 	private boolean active;
 	private byte[] image;
+	
+	public Category() {
+	}
+
+	public Category(String name, boolean active) {
+		this.name = name;
+		this.active = active;
+
+	}
 	
 	@OneToMany
 	private Set<Product> products;

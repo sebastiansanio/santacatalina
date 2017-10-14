@@ -7,28 +7,64 @@ window.UpdateProductComponent = React.createClass({
 	        name: '',
 	        description: '',
 	        price: 0,
-	        successUpdate: null
+	        successUpdate: null,
+	        urlCategory:''
+	       
 	    };
 	},
+	
+	  loadProduct: function(){
+		  var productId = this.props.productId;
+		    $.ajax({
+		        type: "GET",
+		        url: "http://localhost:8080/api/products/"+productId,
+		        contentType: "application/json",
+		        success : function(product) {
+		        		this.setState({id: product.id});
+		            this.setState({name: product.name});
+		            this.setState({description: product.description});
+		            this.setState({price: product.price});
+		            this.setState({urlCategory: product._links.category.href});
+		           
+		        }.bind(this),
+		        error: function(xhr, resp, text){
+		            console.log(xhr, resp, text);
+		        }
+		    });
+	  },
 	 
+	 
+
+	  
+	  loadCategories: function () {
+		  var self = this;
+	 	 	$.ajax({
+		        type: "GET",
+		        url: "http://localhost:8080/api/categories",
+		        contentType: "application/json",
+		        success : function(data) {
+		        	 this.setState({
+		        		 categories: data._embedded.categories
+		 	        });
+		        }.bind(this),
+		        error: function(xhr, resp, text){
+		            console.log(xhr, resp, text);
+		        }
+		    });
+		  },
+	  
+	
 	componentDidMount: function(){
 	 
-		var productId = this.props.productId;
+	    this.loadProduct();
+	    this.loadCategories();
 	    
-	    
-	    $.getJSON("http://localhost:8080/api/product/"+productId, function( product ) {
-	            this.setState({id: product.id});
-	            this.setState({name: product.name});
-	            this.setState({description: product.description});
-	            this.setState({price: product.price});
-	        }.bind(this));
-	 
-	    $('.page-header h1').text('Update product');
+	    $('.page-header h1').text('Read Product');
 	},
 	 
 	
 	onCategoryChange: function(e){
-	    this.setState({selectedCategoryId: e.target.value});
+	    this.setState({urlCategory: e.target.value});
 	},
 	 
 	onNameChange: function(e){
@@ -50,12 +86,18 @@ window.UpdateProductComponent = React.createClass({
 	        name: this.state.name,
 	        description: this.state.description,
 	        price: this.state.price,
-	        category_id: this.state.selectedCategoryId
+	        category:{
+	        		href:this.state.urlCategory
+	        }
 	    };
+	    
+	   
+	   
+	   
 	    
 	    $.ajax({
 	        type: "PUT",
-	        url: "http://localhost:8080/api/product",
+	        url: "http://localhost:8080/api/products/"+this.state.id,
 	        contentType: "application/json",
 	        data: JSON.stringify(form_data),
 	        success : function(response) {
@@ -63,7 +105,7 @@ window.UpdateProductComponent = React.createClass({
 		    
 	        }.bind(this),
 	        error: function(xhr, resp, text){
-	        	this.setState({successUpdate: "No se pudo actualizar el producto"});
+	        		this.setState({successUpdate: "No se pudo actualizar el producto"});
 	            console.log(xhr, resp, text);
 	        }
 	    });
@@ -73,9 +115,9 @@ window.UpdateProductComponent = React.createClass({
 	},
 	 
 	render: function() {
-	    var categoriesOptions = this.state.categories.map(function(category){
+		var categoriesOptions = this.state.categories.map(function(category){
 	        return (
-	            <option key={category.id} value={category.id}>{category.name}</option>
+	            <option key={category._links.category.href} value={category._links.category.href}>{category.name}</option>
 	        );
 	    });
 	 
@@ -103,7 +145,7 @@ window.UpdateProductComponent = React.createClass({
 	                Read Products
 	            </a>
 	 
-	            <form onSubmit={this.onSave}>
+	            <form>
 	                <table className='table table-bordered table-hover'>
 	                    <tbody>
 	                    <tr>
@@ -149,8 +191,8 @@ window.UpdateProductComponent = React.createClass({
 	                            <select
 	                                onChange={this.onCategoryChange}
 	                                className='form-control'
-	                                value={this.state.selectedCategoryId}>
-	                                <option value="-1">Select category...</option>
+	                                value={this.state.urlCategory}>
+	                                <option>Select category...</option>
 	                                {categoriesOptions}
 	                                </select>
 	                        </td>
