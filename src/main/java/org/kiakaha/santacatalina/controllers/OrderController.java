@@ -1,13 +1,13 @@
-package org.kiakaha.santacatalina;
+package org.kiakaha.santacatalina.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class HomeController {
+public class OrderController {
  
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/order")
     public String index() {
-        return "index.html";
+        return "orderView.html";
     }
 }
