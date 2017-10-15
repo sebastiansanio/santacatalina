@@ -40,11 +40,11 @@ window.UpdateProductComponent = React.createClass({
 		  var self = this;
 	 	 	$.ajax({
 		        type: "GET",
-		        url: "http://localhost:8080/api/categories",
+		        url: "http://localhost:8080/api/products",
 		        contentType: "application/json",
 		        success : function(data) {
 		        	 this.setState({
-		        		 categories: data._embedded.categories
+		        		 categories: data._embedded.products
 		 	        });
 		        }.bind(this),
 		        error: function(xhr, resp, text){
@@ -117,7 +117,7 @@ window.UpdateProductComponent = React.createClass({
 	render: function() {
 		var categoriesOptions = this.state.categories.map(function(category){
 	        return (
-	            <option key={category._links.category.href} value={category._links.category.href}>{category.name}</option>
+	            <option key={category._links.category.href} value={category._links.category.href}>{category.category.name}</option>
 	        );
 	    });
 	 

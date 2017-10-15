@@ -34,12 +34,12 @@ window.ReadProductsComponent = React.createClass({
  
         return (
             <div className='overflow-hidden'>
-                <TopActionsComponent changeAppMode={this.props.changeAppMode} />
                 <SearchFiltered changeAppMode={this.props.changeAppMode} name={this.props.name}  changeName={this.props.changeName} />
  				
                 <ProductsTable
                     products={filteredProducts}
                     changeAppMode={this.props.changeAppMode} />
+                <TopActionsComponent changeAppMode={this.props.changeAppMode} />
             </div>
         );
     }
