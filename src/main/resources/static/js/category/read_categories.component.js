@@ -1,43 +1,45 @@
-window.ReadProductsComponent = React.createClass({
+window.ReadCategoriesComponent = React.createClass({
     getInitialState: function() {
         return {
-            products: []
+            categories: []
         };
     },
     
-    loadProductsFromServer: function () {
+    loadCategoriesFromServer: function () {
 	    var self = this;
 	    if(this.props.name == '' ){
-	    		var url = "http://localhost:8080/api/products"
+	    		var url = "http://localhost:8080/api/categories"
 	    }else{
-	    		var url = "http://localhost:8080/api/products/search/findByNameContainingIgnoreCase?name="+this.props.name
+	    		var url = "http://localhost:8080/api/categories/search/findByNameContainingIgnoreCase?name="+this.props.name
 	    }
 	    $.ajax({
+	    		type: "GET",
+	        contentType: "application/json",
 	      url: url
 	    }).then(function (data) {
-	      self.setState({products: data._embedded.products});
+	      self.setState({categories: data._embedded.categories});
 	    });
 	  },
  
     componentDidMount: function() {
-    		this.loadProductsFromServer();
+    		this.loadCategoriesFromServer();
     },
     
      componentDidUpdate: function () {
-      this.loadProductsFromServer();
+      this.loadCategoriesFromServer();
     },
  
     render: function() {
         // list of products
-        var filteredProducts = this.state.products;
-        $('.page-header h1').text('Productos');
+        var filteredCategories = this.state.categories;
+        $('.page-header h1').text('Categorias');
  
         return (
             <div className='overflow-hidden'>
                 <SearchFiltered changeAppMode={this.props.changeAppMode} name={this.props.name}  changeName={this.props.changeName} />
  				
-                <ProductsTable
-                    products={filteredProducts}
+                <CategoriesTable
+                    categories={filteredCategories}
                     changeAppMode={this.props.changeAppMode} />
                 <TopActionsComponent changeAppMode={this.props.changeAppMode} />
             </div>
