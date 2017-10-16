@@ -115,10 +115,18 @@ window.UpdateProductComponent = React.createClass({
 	},
 	 
 	render: function() {
+		var map = [];
 		var categoriesOptions = this.state.categories.map(function(category){
-	        return (
-	            <option key={category._links.category.href} value={category._links.category.href}>{category.category.name}</option>
-	        );
+			alert(jQuery.inArray(category.category.name, map ))
+			if(jQuery.inArray( category.category.name, map )== -1){
+				map.push(category.category.name);
+				alert(map)
+				return (
+						<option key={category._links.category.href} value={category._links.category.href}>{category.category.name}</option>
+				);
+			}else{
+				
+			}
 	    });
 	 
 	    return (

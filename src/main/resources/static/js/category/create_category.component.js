@@ -82,6 +82,7 @@ window.CreateCategoryComponent = React.createClass({
 	                        onChange={this.onNameChange} />
 	                    </td>
 	                </tr>
+	                
 	 
 	                <tr>
 	                    <td></td>

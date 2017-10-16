@@ -89,7 +89,7 @@ window.UpdateCategoryComponent = React.createClass({
 	            <a href='#'
 	                onClick={() => this.props.changeAppMode('read')}
 	                className='btn btn-primary margin-bottom-1em'>
-	                Read Products
+	                Listas categorias
 	            </a>
 	 
 	            <form>
