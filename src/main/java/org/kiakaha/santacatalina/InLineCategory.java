@@ -1,19 +1,12 @@
 package org.kiakaha.santacatalina;
 
 import org.kiakaha.santacatalina.model.Category;
-import org.kiakaha.santacatalina.model.Product;
 import org.springframework.data.rest.core.config.Projection;
 
-@Projection(name = "inlineCategory", types = { Product.class }) 
+
+@Projection(name = "inlineCategory", types = { Category.class })
 public interface InLineCategory {
+	Long getId();
 	String getName();
-	String getPrice();
-	String getDescription();
-	String getImage();
-	String isDeleted();
 	String isActive();
-
-	  Long getId();
-
-	  Category getCategory();
 }

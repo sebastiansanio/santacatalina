@@ -3,13 +3,11 @@ package org.kiakaha.santacatalina.model;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -20,7 +18,7 @@ public class Product {
 	@Id
 	@GeneratedValue
 	private Long id;
-
+	@Column(unique= true)
 	private String name;
 
 	private BigDecimal price;

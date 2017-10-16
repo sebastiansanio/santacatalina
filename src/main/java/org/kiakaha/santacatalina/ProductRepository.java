@@ -7,9 +7,11 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-@RepositoryRestResource(excerptProjection = InLineCategory.class)
+@RepositoryRestResource(excerptProjection = InLineProduct.class)
 public interface ProductRepository extends PagingAndSortingRepository<Product, Long> {
 	
 	List<Product> findByNameContainingIgnoreCase(@Param("name") String name);
+	
+	
 	
 }
