@@ -1,51 +1,68 @@
-class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
-  }
+$.getJSON('http://localhost:8080/js/order/productsSample.json', function(data) {
+    
+}) .done(function() {
+    alert(data);
+});
 
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
-  }
 
-  componentWillUnmount() {
-    clearInterval(this.timerID);
-  }
+function Product(props) {
+	  return (
+			  <p> Coca Cola  </p>
+	  );
+}
 
-  tick() {
-    this.setState({
-      date: new Date()
-    });
-  }
+function Products(props) {
+	  return (
+			  <div className="col-md-12"> 
+			  	<Product />
+			  </div>
+	  );
+}
 
-  render() {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
-  }
+function Category(props) {
+	  return (
+	    <div>
+	    	<h4>Bebidas</h4> 
+	    	<Products />
+	    </div>
+	  );
 }
 
 
-function ActionLink() {
-	  function handleClick(e) {
-	    e.preventDefault();
-	    console.log('The link was clicked.');
-	  }
+function Categories(props) {
+  return (
+    <div className="row">
+    	<div className="col-md-4"> 
+    		<Category />  
+    	</div>
+    </div>
+  );
+}
 
+
+function Cart(props) {
 	  return (
-	    <a href="#" onClick={handleClick}>
-	      Click me
-	    </a>
+	    <div className="row">
+
+	    </div>
 	  );
 	}
 
+function App(props) {
+  return (
+    <div className="container-fluid row">
+      <div className="col-md-9">
+        <Categories />
+      </div>
+      <div className="col-md-3">
+        <Cart/>
+      </div>
+    </div>
+  );
+}
+
+
 ReactDOM.render(
-		   <ActionLink/>,
+		   <App/>,
 		  document.getElementById('root')
 		);
