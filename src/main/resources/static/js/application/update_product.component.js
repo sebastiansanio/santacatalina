@@ -117,7 +117,6 @@ window.UpdateProductComponent = React.createClass({
 	render: function() {
 		var map = [];
 		var categoriesOptions = this.state.categories.map(function(category){
-			alert(jQuery.inArray(category.category.name, map ))
 			if(jQuery.inArray( category.category.name, map )== -1){
 				map.push(category.category.name);
 				alert(map)
