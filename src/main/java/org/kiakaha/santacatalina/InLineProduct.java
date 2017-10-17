@@ -1,5 +1,7 @@
 package org.kiakaha.santacatalina;
 
+import java.math.BigDecimal;
+
 import org.kiakaha.santacatalina.model.Category;
 import org.kiakaha.santacatalina.model.Product;
 import org.springframework.data.rest.core.config.Projection;
@@ -7,11 +9,11 @@ import org.springframework.data.rest.core.config.Projection;
 @Projection(name = "inlineCategory", types = { Product.class })
 public interface InLineProduct {
 	String getName();
-	String getPrice();
+	BigDecimal getPrice();
 	String getDescription();
-	String getImage();
-	String isDeleted();
-	String isActive();
+	byte[] getImage();
+	boolean isDeleted();
+	boolean isActive();
 	Long getId();
 	Category getCategory();
 }

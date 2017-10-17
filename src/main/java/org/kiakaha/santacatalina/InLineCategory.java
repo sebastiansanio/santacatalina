@@ -8,5 +8,5 @@ import org.springframework.data.rest.core.config.Projection;
 public interface InLineCategory {
 	Long getId();
 	String getName();
-	String isActive();
+	boolean isActive();
 }
