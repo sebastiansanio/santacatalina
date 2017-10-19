@@ -10,9 +10,7 @@ class Product extends React.Component{
 		 return (
 			  <div>
 			  <label> {this.state.product.name} (${this.state.product.price})</label>  
-			  <button className="btn btn-primary btn-xs">
-			  	Lo quiero
-			  </button>
+			  <button className="btn btn-primary btn-xs">+</button>
 			  </div>
 		 );
 	}
@@ -47,7 +45,7 @@ class Products extends React.Component{
 				  {
 		    		this.state.products.map((product) => {
 		    			return <div key={product.id} >  
-		                <Product product={ product }   />
+		                <Product product={ product } addProduct={this.props.addProduct(product)}   />
 		                </div>
 		              })
 				  }
@@ -67,7 +65,7 @@ class Category extends React.Component {
 	  return (
 	    <div>
 	    	<h4>{this.state.category.name}</h4> 
-	    	<Products category={this.state.category}/>
+	    	<Products category={this.state.category} addProduct={this.props.addProduct} />
 	    </div>
 	  );
 	}
@@ -103,7 +101,7 @@ class Categories extends React.Component {
     		
     		this.state.categories.map((category) => {
                 return <div key={category.id} className="col-md-4">  
-                <Category category={ category }   />
+                <Category category={ category } addProduct={this.props.addProduct}   />
                 </div>
               })
     		}
@@ -132,13 +130,25 @@ class Cart extends React.Component {
 
 
 class App extends React.Component {
+	constructor(props) {
+	    super(props)
+	    this.state = { cartItems: {} }
+	  }
+	addProduct (product) {
+		var cartItems = {}
+		for (var i in this.state.cartItems){
+			cartItems[i] = this.state.cartItems[i]
+		}
+		cartItems[product.id] = {name: product.name, price: product.price, quantity: 1} 
+		this.setState({cartItems: cartItems})
+	}
 	render(){
 	  return (
 	    <div className="container-fluid row">
 	      <div className="col-md-9">
-	        <Categories/>
+	        <Categories addProduct={this.addProduct}/>
 	      </div>
-	      <div className="col-md-3">
+	      <div className="col-md-3" items={this.state.cartItems} >
 	        <Cart/>
 	      </div>
 	    </div>
@@ -147,7 +157,7 @@ class App extends React.Component {
 }
 
 
-ReactDOM.render(  <App/>,  document.getElementById('root'));
+ReactDOM.render(<App/>,document.getElementById('root'));
 
 
 
