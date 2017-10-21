@@ -1,20 +1,23 @@
 
 
-
 class Product extends React.Component{
 	constructor(props) {
 	    super(props)
-	    this.state = props
+	    this.state = {product: props.product}
 	  }
+	
+	handleClick(){
+		this.props.addProduct(this.props.product)
+	}
+	
 	render(){
 		 return (
 			  <div>
 			  <label> {this.state.product.name} (${this.state.product.price})</label>  
-			  <button className="btn btn-primary btn-xs">+</button>
+			  <button className="btn btn-default btn-xs" onClick={this.handleClick.bind(this)}><span className="glyphicon glyphicon-plus"></span> </button>
 			  </div>
 		 );
 	}
-	
 }
 
 
@@ -24,7 +27,7 @@ class Products extends React.Component{
 	    this.state = { products: [] }
 	  }
 	componentWillMount() {
-	    fetch('/api/products/search/findByCategoryId?id=1')
+	    fetch('/api/products/search/findByCategoryId?id='+this.props.category.id)
 	      .then((response) => {
 	        return response.json()
 	      })
@@ -45,7 +48,7 @@ class Products extends React.Component{
 				  {
 		    		this.state.products.map((product) => {
 		    			return <div key={product.id} >  
-		                <Product product={ product } addProduct={this.props.addProduct(product)}   />
+		                <Product product={ product } addProduct={this.props.addProduct}   />
 		                </div>
 		              })
 				  }
@@ -77,6 +80,7 @@ class Categories extends React.Component {
 	    super(props)
 	    this.state = { categories: [] }
 	  }
+	
 	
 	componentWillMount() {
 	    fetch('/api/categories')
@@ -111,45 +115,126 @@ class Categories extends React.Component {
 }
 
 
+class CartItem extends React.Component {
+	constructor(props) {
+	    super(props)
+	    this.state = { item: props.item }
+	    
+	}
+	handleAdd(){
+		this.props.addProduct(this.state.item.product)
+	}
+	handleRemove(){
+		this.props.removeProduct(this.state.item.product)
+	}
+	componentWillReceiveProps(props){
+		this.setState({ item: props.item })
+	}
+	render(){ return (
+	    <div >
+	    {this.state.item.product.name}: {this.state.item.quantity}
+		  <button className="btn btn-default btn-xs" onClick={this.handleAdd.bind(this)}><span className="glyphicon glyphicon-plus"></span> </button>
+		  <button className="btn btn-danger btn-xs" onClick={this.handleRemove.bind(this)}><span className="glyphicon glyphicon-minus"></span> </button>
+
+    </div>)
+	}
+}
+
+class CartItems extends React.Component {
+	constructor(props){
+		super(props)
+		this.state = {cartItems: props.cartItems}
+	}
+	componentWillReceiveProps(props){
+		this.setState({cartItems: props.cartItems})
+	}
+	render(){
+		if (this.state.cartItems.length == 0){
+			return                 <div >  
+       			Sin ítems
+       			</div>
+		}else{
+			return (
+			<div className="row">
+    	{
+    		
+    		this.state.cartItems.map((item) => {
+                return <div key={item.id} className="col-md-12">  
+                <CartItem item={ item } addProduct={this.props.addProduct} removeProduct={this.props.removeProduct} />
+                </div>
+              })
+    		}
+    	</div>)
+		}
+	}
+}
+
 class Cart extends React.Component {
 	constructor(props) {
 	    super(props)
-	    this.state = { items: [] }
-	  }
-	render(){ return (
+	    this.state = { cartItems: props.cartItems }
+	}
+	componentWillReceiveProps(props){
+		this.setState({cartItems: props.cartItems})
+	}
+	render(){ 
+		return (
 	    <div className="row">
-    	<h4>
-    		Pedido
-	    </h4>
-    </div>)
+    	<h4>Pedido</h4>
+    	 <CartItems cartItems={this.state.cartItems} addProduct={this.props.addProduct} removeProduct={this.props.removeProduct}/>
+    	</div>
+    	)
 	}
 	
 }
 
 
-
-
 class App extends React.Component {
 	constructor(props) {
 	    super(props)
-	    this.state = { cartItems: {} }
-	  }
-	addProduct (product) {
-		var cartItems = {}
-		for (var i in this.state.cartItems){
-			cartItems[i] = this.state.cartItems[i]
+	    this.state = { cartItems: [] }
+	    this.addProduct = this.addProduct.bind(this);
+	    this.removeProduct = this.removeProduct.bind(this);
+	}
+	
+	addProduct(product){
+		var cartItems = this.state.cartItems.slice()
+		
+		var exists = false
+		for (var i=0;i<cartItems.length;i++){
+			if(cartItems[i].id == product.id){
+				cartItems[i].quantity = cartItems[i].quantity + 1
+				exists = true
+			}
 		}
-		cartItems[product.id] = {name: product.name, price: product.price, quantity: 1} 
+		if(!exists){
+			cartItems.push({id: product.id,product: product, quantity: 1})
+		}
 		this.setState({cartItems: cartItems})
 	}
+	
+	removeProduct(product){
+		var cartItems = this.state.cartItems.slice()
+		
+		for (var i=0;i<cartItems.length;i++){
+			if(cartItems[i].id == product.id){
+				cartItems[i].quantity = cartItems[i].quantity - 1
+			}
+			if(cartItems[i].quantity <= 0){
+				cartItems.splice(i,1)
+			}
+		}
+		this.setState({cartItems: cartItems})
+	}
+	    
 	render(){
 	  return (
 	    <div className="container-fluid row">
 	      <div className="col-md-9">
 	        <Categories addProduct={this.addProduct}/>
 	      </div>
-	      <div className="col-md-3" items={this.state.cartItems} >
-	        <Cart/>
+	      <div className="col-md-3" >
+	        <Cart cartItems={this.state.cartItems} addProduct={this.addProduct} removeProduct={this.removeProduct}/>
 	      </div>
 	    </div>
 	  );
