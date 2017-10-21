@@ -13,8 +13,8 @@ class Product extends React.Component{
 	render(){
 		 return (
 			  <div>
-			  <label> {this.state.product.name} (${this.state.product.price})</label>  
-			  <button className="btn btn-default btn-xs" onClick={this.handleClick.bind(this)}><span className="glyphicon glyphicon-plus"></span> </button>
+			  <p className="santacatalina-product-name"> {this.state.product.name.toUpperCase()} (${this.state.product.price}) 
+			  <button className="btn btn-default btn-circle" onClick={this.handleClick.bind(this)}><span className="glyphicon glyphicon-plus"></span> </button></p>  
 			  </div>
 		 );
 	}
@@ -67,7 +67,7 @@ class Category extends React.Component {
 	render(){
 	  return (
 	    <div>
-	    	<h4>{this.state.category.name}</h4> 
+	    	<h4 className="santacatalina-font">{this.state.category.name.toUpperCase()}</h4> 
 	    	<Products category={this.state.category} addProduct={this.props.addProduct} />
 	    </div>
 	  );
@@ -131,10 +131,10 @@ class CartItem extends React.Component {
 		this.setState({ item: props.item })
 	}
 	render(){ return (
-	    <div >
-	    {this.state.item.product.name}: {this.state.item.quantity}
-		  <button className="btn btn-default btn-xs" onClick={this.handleAdd.bind(this)}><span className="glyphicon glyphicon-plus"></span> </button>
-		  <button className="btn btn-danger btn-xs" onClick={this.handleRemove.bind(this)}><span className="glyphicon glyphicon-minus"></span> </button>
+	    <div className="santacatalina-product-name" >
+	    {this.state.item.product.name.toUpperCase()}: {this.state.item.quantity}
+		  <button className="btn btn-default btn-circle" onClick={this.handleAdd.bind(this)}><span className="glyphicon glyphicon-plus"></span> </button>
+		  <button className="btn btn-danger btn-circle" onClick={this.handleRemove.bind(this)}><span className="glyphicon glyphicon-minus"></span> </button>
 
     </div>)
 	}
@@ -151,7 +151,7 @@ class CartItems extends React.Component {
 	render(){
 		if (this.state.cartItems.length == 0){
 			return                 <div >  
-       			Sin ítems
+       			Aún no ha iniciado el pedido
        			</div>
 		}else{
 			return (
@@ -180,7 +180,7 @@ class Cart extends React.Component {
 	render(){ 
 		return (
 	    <div className="row">
-    	<h4>Pedido</h4>
+    	<h4 className="santacatalina-font">PEDIDO</h4>
     	 <CartItems cartItems={this.state.cartItems} addProduct={this.props.addProduct} removeProduct={this.props.removeProduct}/>
     	</div>
     	)
@@ -188,6 +188,29 @@ class Cart extends React.Component {
 	
 }
 
+
+class Navbar extends React.Component {
+	constructor(props){
+		super(props)
+	}
+	render(){
+		return (
+
+      <div className="container">
+        <nav className="navbar navbar-primary">
+          <div className="container-fluid">
+            <div className="navbar-header">
+              <a className="navbar-brand" href="#"><img height="50px" src="/assets/images/Logo enSantaCatalina-02.png" alt="Logo Ensantacatalina" />
+              </a>
+            </div>
+
+          </div>
+        </nav>
+      </div>
+
+  )
+	}
+}
 
 class App extends React.Component {
 	constructor(props) {
@@ -230,10 +253,11 @@ class App extends React.Component {
 	render(){
 	  return (
 	    <div className="container-fluid row">
+	    <Navbar/>
 	      <div className="col-md-9">
 	        <Categories addProduct={this.addProduct}/>
 	      </div>
-	      <div className="col-md-3" >
+	      <div className="col-md-3 left-border" >
 	        <Cart cartItems={this.state.cartItems} addProduct={this.addProduct} removeProduct={this.removeProduct}/>
 	      </div>
 	    </div>

@@ -22,7 +22,7 @@ public class DataBaseLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-
+		
 		Category categorySalad = new Category("Ensalada", true);
 		this.categoryRepository.save(categorySalad);
 		this.productRepository.save(new Product("Cesar", BigDecimal.valueOf(95.00), "", true, false, categorySalad));
@@ -41,15 +41,18 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.productRepository.save(new Product("Tapa de Asado", BigDecimal.valueOf(95.00), "", true, false, categoryHotSandwiches));
 		this.productRepository.save(new Product("Wrap de Pollo", BigDecimal.valueOf(95.00), "", true, false, categoryHotSandwiches));
 
-		Category categoryColdSandwiches = new Category("Sandwich Frio", true);
-		this.categoryRepository.save(categoryColdSandwiches);
-		this.productRepository.save(new Product("Pollo y Curry", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
-		this.productRepository.save(new Product("Salmon", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
-		this.productRepository.save(new Product("Salmon Crudo y Brie", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
-		this.productRepository.save(new Product("Vegetariano", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
-		this.productRepository.save(new Product("Wrap Clasico", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
-		this.productRepository.save(new Product("Wrap de Atun", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
+		Category categoryDayDish = new Category("Plato del día", true);
+		this.categoryRepository.save(categoryDayDish);
+		this.productRepository.save(new Product("Plato del día", BigDecimal.valueOf(95.00), "", true, false, categoryDayDish));
+		
+		Category categoryJuices = new Category("Jugos", true);
+		this.categoryRepository.save(categoryJuices);
+		this.productRepository.save(new Product("Naranja", BigDecimal.valueOf(45.00), "", true, false, categoryJuices));
+		this.productRepository.save(new Product("Naranja y Frutilla", BigDecimal.valueOf(45.00), "", true, false, categoryJuices));
+		this.productRepository.save(new Product("Pomelo", BigDecimal.valueOf(45.00), "", true, false, categoryJuices));
+		this.productRepository.save(new Product("Sandía y frutilla", BigDecimal.valueOf(45.00), "", true, false, categoryJuices));
 
+		
 		Category categoryPie = new Category("Tarta", true);
 		this.categoryRepository.save(categoryPie);
 		this.productRepository.save(new Product("Arroz Yamani", BigDecimal.valueOf(95.00), "", true, false, categoryPie));
@@ -68,11 +71,6 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.productRepository.save(new Product("Zapallito", BigDecimal.valueOf(95.00), "", true, false, categoryPie));
 		this.productRepository.save(new Product("Zuccini", BigDecimal.valueOf(95.00), "", true, false, categoryPie));
 
-		
-		Category categoryDayDish = new Category("Plato del día", true);
-		this.categoryRepository.save(categoryDayDish);
-		this.productRepository.save(new Product("Plato del día", BigDecimal.valueOf(95.00), "", true, false, categoryDayDish));
-
 		Category categoryDesserts = new Category("Postres", true);
 		this.categoryRepository.save(categoryDesserts);
 		this.productRepository.save(new Product("creme brulee", BigDecimal.valueOf(40.00), "", true, false, categoryDesserts));
@@ -87,6 +85,17 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.productRepository.save(new Product("Chocolate y naranja", BigDecimal.valueOf(40.00), "", true, false, categoryDesserts));
 		this.productRepository.save(new Product("Frutas", BigDecimal.valueOf(40.00), "", true, false, categoryDesserts));
 
+		
+		Category categoryColdSandwiches = new Category("Sandwich Frio", true);
+		this.categoryRepository.save(categoryColdSandwiches);
+		this.productRepository.save(new Product("Pollo y Curry", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
+		this.productRepository.save(new Product("Salmon", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
+		this.productRepository.save(new Product("Salmon Crudo y Brie", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
+		this.productRepository.save(new Product("Vegetariano", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
+		this.productRepository.save(new Product("Wrap Clasico", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
+		this.productRepository.save(new Product("Wrap de Atun", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches));
+
+
 		Category categoryDrinks = new Category("Bebidas", true);
 		this.categoryRepository.save(categoryDrinks);
 		this.productRepository.save(new Product("Pepsi Comun", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks));
@@ -100,12 +109,6 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.productRepository.save(new Product("PDT Pomelo free", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks));
 		this.productRepository.save(new Product("Agua con Gas", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks));
 
-		Category categoryJuices = new Category("Jugos", true);
-		this.categoryRepository.save(categoryJuices);
-		this.productRepository.save(new Product("Naranja", BigDecimal.valueOf(45.00), "", true, false, categoryJuices));
-		this.productRepository.save(new Product("Naranja y Frutilla", BigDecimal.valueOf(45.00), "", true, false, categoryJuices));
-		this.productRepository.save(new Product("Pomelo", BigDecimal.valueOf(45.00), "", true, false, categoryJuices));
-		this.productRepository.save(new Product("Sandía y frutilla", BigDecimal.valueOf(45.00), "", true, false, categoryJuices));
 
 	}
 }
