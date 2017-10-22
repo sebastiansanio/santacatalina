@@ -14,7 +14,7 @@ class Product extends React.Component{
 		 return (
 			  <div>
 			  <p className="santacatalina-product-name"> {this.state.product.name.toUpperCase()} (${this.state.product.price}) 
-			  <button className="btn btn-default btn-circle" onClick={this.handleClick.bind(this)}><span className="glyphicon glyphicon-plus"></span> </button></p>  
+			  <button className="btn btn-default btn-circle" onClick={this.handleClick.bind(this)}><span className="glyphicon glyphicon-plus glyphicon-notop"></span> </button></p>  
 			  </div>
 		 );
 	}
@@ -133,8 +133,8 @@ class CartItem extends React.Component {
 	render(){ return (
 	    <div className="santacatalina-product-name" >
 	    {this.state.item.product.name.toUpperCase()}: {this.state.item.quantity}
-		  <button className="btn btn-default btn-circle" onClick={this.handleAdd.bind(this)}><span className="glyphicon glyphicon-plus"></span> </button>
-		  <button className="btn btn-danger btn-circle" onClick={this.handleRemove.bind(this)}><span className="glyphicon glyphicon-minus"></span> </button>
+		  <button className="btn btn-default btn-circle" onClick={this.handleAdd.bind(this)}><span className="glyphicon glyphicon-plus glyphicon-notop"></span> </button>
+		  <button className="btn btn-danger btn-circle" onClick={this.handleRemove.bind(this)}><span className="glyphicon glyphicon-minus glyphicon-notop"></span> </button>
 
     </div>)
 	}
