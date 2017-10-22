@@ -8,9 +8,9 @@ window.ReadProductsComponent = React.createClass({
     loadProductsFromServer: function () {
 	    var self = this;
 	    if(this.props.name == '' ){
-	    		var url = "http://localhost:8080/api/products"
+	    		var url = "/api/products"
 	    }else{
-	    		var url = "http://localhost:8080/api/products/search/findByNameContainingIgnoreCase?name="+this.props.name
+	    		var url = "/api/products/search/findByNameContainingIgnoreCase?name="+this.props.name
 	    }
 	    $.ajax({
 	      url: url
@@ -35,7 +35,6 @@ window.ReadProductsComponent = React.createClass({
         return (
             <div className='overflow-hidden'>
                 <SearchFiltered changeAppMode={this.props.changeAppMode} name={this.props.name}  changeName={this.props.changeName} />
- 				
                 <ProductsTable
                     products={filteredProducts}
                     changeAppMode={this.props.changeAppMode} />

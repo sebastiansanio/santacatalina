@@ -6,6 +6,7 @@ window.CreateProductComponent = React.createClass({
 	        name: '',
 	        description: '',
 	        price: '',
+	        image:null,
 	        successCreation: null
 	    };
 	},
@@ -43,16 +44,31 @@ window.CreateProductComponent = React.createClass({
 	    this.setState({price: e.target.value});
 	},
 	
+	onImageChange: function(e) {
+		var fileData = new Blob([e.target.files[0]]);
+	    var reader = new FileReader();
+	    reader.onload = function() {
+	      var arrayBuffer = reader.result
+	      var bytes = new Uint8Array(arrayBuffer);
+	      var b64encoded = btoa(String.fromCharCode.apply(null, bytes));
+	      document.getElementById("demo").value =  b64encoded.toString();
+	    }
+	    reader.readAsArrayBuffer(fileData)
+	    
+	    this.setState({image: document.getElementById("demo").value});
+	    
+	},
+	
+	
 	onSave: function(e){
-	 
 	    var form_data={
 	        name: this.state.name,
 	        description: this.state.description,
 	        price: this.state.price,
-	        category: this.state.selectedCategoryId
+	        category: this.state.selectedCategoryId,
+	        image:document.getElementById("demo").value
 	    };
-	    
-	    
+	    console.log(JSON.stringify(form_data))
 	    $.ajax({
 	        type: "POST",
 	        url: "http://localhost:8080/api/products",
@@ -70,8 +86,11 @@ window.CreateProductComponent = React.createClass({
 	            console.log(xhr, resp, text);
 	        }
 	    });
+	    
 	    event.preventDefault();
 	},
+	
+	  
 	render: function() {
 		
 		// make categories as option for the select tag.
@@ -107,6 +126,7 @@ window.CreateProductComponent = React.createClass({
 	        </a>
 	 
 	 
+	            <input type="hidden" name="demo" id="demo" value={this.state.image} />
 	        <form>
 	            <table className='table table-bordered table-hover'>
 	            <tbody>
@@ -148,7 +168,7 @@ window.CreateProductComponent = React.createClass({
 	                    </td>
 	                </tr>
 	                
-	                <tr>
+	               <tr>
                     <td>Category</td>
                     <td>
                         <select
@@ -160,6 +180,18 @@ window.CreateProductComponent = React.createClass({
                         </select>
                     </td>
                 </tr>
+                
+                <tr>
+                <td>Imagen</td>
+                <td>
+	                <input 
+	                className='form-control' 
+	                	onChange={this.onImageChange} 
+	                accept=".jpg, .jpeg, .png"
+	                type="file" 
+	                	name="img"/>
+                </td>
+            </tr>
 	 
 	 
 	                <tr>

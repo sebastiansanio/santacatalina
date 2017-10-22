@@ -17,7 +17,7 @@ window.UpdateProductComponent = React.createClass({
 		  var productId = this.props.productId;
 		    $.ajax({
 		        type: "GET",
-		        url: "http://localhost:8080/api/products/"+productId,
+		        url: "/api/products/"+productId,
 		        contentType: "application/json",
 		        success : function(product) {
 		        		this.setState({id: product.id});
@@ -40,7 +40,7 @@ window.UpdateProductComponent = React.createClass({
 		  var self = this;
 	 	 	$.ajax({
 		        type: "GET",
-		        url: "http://localhost:8080/api/products",
+		        url: "/api/products",
 		        contentType: "application/json",
 		        success : function(data) {
 		        	 this.setState({
@@ -90,14 +90,11 @@ window.UpdateProductComponent = React.createClass({
 	        		href:this.state.urlCategory
 	        }
 	    };
-	    
-	   
-	   
 	   
 	    
 	    $.ajax({
 	        type: "PUT",
-	        url: "http://localhost:8080/api/products/"+this.state.id,
+	        url: "/api/products/"+this.state.id,
 	        contentType: "application/json",
 	        data: JSON.stringify(form_data),
 	        success : function(response) {
