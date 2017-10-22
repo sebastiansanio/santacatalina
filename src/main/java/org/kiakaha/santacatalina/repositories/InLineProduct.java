@@ -1,4 +1,4 @@
-package org.kiakaha.santacatalina;
+package org.kiakaha.santacatalina.repositories;
 
 import java.math.BigDecimal;
 

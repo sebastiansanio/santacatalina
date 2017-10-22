@@ -8,9 +8,9 @@ window.ReadCategoriesComponent = React.createClass({
     loadCategoriesFromServer: function () {
 	    var self = this;
 	    if(this.props.name == '' ){
-	    		var url = "http://localhost:8080/api/categories"
+	    		var url = "/api/categories"
 	    }else{
-	    		var url = "http://localhost:8080/api/categories/search/findByNameContainingIgnoreCase?name="+this.props.name
+	    		var url = "/api/categories/search/findByNameContainingIgnoreCase?name="+this.props.name
 	    }
 	    $.ajax({
 	    		type: "GET",

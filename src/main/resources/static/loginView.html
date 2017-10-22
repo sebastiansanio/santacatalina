@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 	<meta charset="utf-8">
 	<title>Santa Catalina</title>
@@ -9,12 +10,10 @@
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="shortcut icon" href="assets/images/favicon.ico" type="image/x-icon" />
 	<link href="assets/css/order.css" rel="stylesheet" media="screen" />
- 
 </head>
 <body>
-    <div class="container">
- 
- 		<nav class="navbar navbar-primary">
+	<div class="container">
+		<nav class="navbar navbar-primary">
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<a class="navbar-brand" href="#"><img height="50px"
@@ -24,14 +23,28 @@
 
 			</div>
 		</nav>
- 
-		<div id='content'>
-	        <h3>     
-	        Bienvenido
-	        </h3>
-		</div>
- 		
-    </div>
- 
 
+		<div class="row">
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-3 centred">
+				<form action="/login" method="post">
+					<div class="form-group">
+						<label for="username"> Usuario:</label>
+						<input class="form-control" type="text" name="username" />
+						
+					</div>
+					<div class="form-group">
+						<label for="password"> Clave:</label>
+						<input class="form-control" type="password" name="password" />
+						
+					</div>
+					<div class="form-group">
+						<input class="btn btn-primary" type="submit" value="Acceder" />
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
 </html>

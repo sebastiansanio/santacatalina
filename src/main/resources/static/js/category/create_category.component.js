@@ -22,7 +22,7 @@ window.CreateCategoryComponent = React.createClass({
 	    
 	    $.ajax({
 	        type: "POST",
-	        url: "http://localhost:8080/api/categories",
+	        url: "/api/categories",
 	        contentType: "application/json",
 	        data: JSON.stringify(form_data),
 	        success : function(response) {

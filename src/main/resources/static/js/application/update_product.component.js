@@ -90,7 +90,6 @@ window.UpdateProductComponent = React.createClass({
 	        		href:this.state.urlCategory
 	        }
 	    };
-	   
 	    
 	    $.ajax({
 	        type: "PUT",
