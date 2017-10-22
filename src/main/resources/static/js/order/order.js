@@ -169,7 +169,7 @@ class CartItems extends React.Component {
 	}
 }
 
-class ConfirmButton extends React.Component {
+class OrderButton extends React.Component {
 	constructor(props) {
 	    super(props)
 	    this.state = { cartItems: props.cartItems }
@@ -180,10 +180,51 @@ class ConfirmButton extends React.Component {
 	render(){
 		return (
 				<div className="centred">
-				<button className='btn btn-primary santacatalina-button'>CONFIRMAR</button>
+				<button data-toggle="modal" data-target="#confirmModal" className='btn btn-default santacatalina-button'>PEDIR</button>
+				<ConfirmModal cartItems={this.state.cartItems}/>
 				</div>
 		)
 	}
+}
+
+class ConfirmModal extends React.Component {
+	constructor(props){
+		super(props)
+		this.state = {cartItems: props.cartItems}
+	}
+	componentWillReceiveProps(props){
+		this.setState({cartItems: props.cartItems})
+	}
+	render(){
+		return(
+		<div id="confirmModal" className="modal fade" role="dialog">
+		  <div className="modal-dialog">
+
+		    <div className="modal-content">
+		      <div className="modal-header">
+		        <button type="button" className="close" data-dismiss="modal">&times;</button>
+		        <h4 className="modal-title santacatalina-font">CONFIRMACIÓN</h4>
+		      </div>
+		      <div className="modal-body row">
+		      	{
+		   		this.state.cartItems.map((item) => {
+	                return <div key={item.id} className="col-md-12">  
+	                <p className="santacatalina-product-name"> {item.product.name.toUpperCase()}: {item.quantity}  </p>
+	                </div>
+	              })
+	    		}
+		      </div>
+		      <div className="modal-footer">
+		      <button type="button" className="btn btn-primary" >Confirmar</button>
+		        <button type="button" className="btn btn-default" data-dismiss="modal">Volver</button>
+		      </div>
+		    </div>
+
+		  </div>
+		</div>
+		)
+	}
+	
 }
 
 class Cart extends React.Component {
@@ -199,7 +240,7 @@ class Cart extends React.Component {
 	    <div className="row">
     	<h4 className="santacatalina-font">PEDIDO</h4>
     	 <CartItems cartItems={this.state.cartItems} addProduct={this.props.addProduct} removeProduct={this.props.removeProduct}/>
-    	 {this.state.cartItems.length>0?<ConfirmButton/>:''}
+    	 {this.state.cartItems.length>0?<OrderButton cartItems={this.state.cartItems}/>:''}
     	</div>
     	)
 	}
