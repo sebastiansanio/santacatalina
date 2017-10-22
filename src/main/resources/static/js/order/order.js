@@ -190,10 +190,28 @@ class OrderButton extends React.Component {
 class ConfirmModal extends React.Component {
 	constructor(props){
 		super(props)
-		this.state = {cartItems: props.cartItems}
+		this.state = {cartItems: props.cartItems, code: ''}
+		this.confirm = this.confirm.bind(this);
 	}
 	componentWillReceiveProps(props){
 		this.setState({cartItems: props.cartItems})
+	}
+	confirm(){
+		var order = new Object();
+		order.code = this.state.code
+		order.items = []
+   		this.state.cartItems.map((item) => {
+   			var orderItem = new Object()
+   			orderItem.product = item.product
+   			orderItem.price = item.product.price
+   			orderItem.quantity = item.quantity
+   			order.items.push(orderItem)
+        })
+        alert("Pedido confirmado");
+		console.log(JSON.stringify(order));
+	}
+	onCodeChange(event){
+		this.setState({code: event.target.value})
 	}
 	render(){
 		return(
@@ -206,6 +224,11 @@ class ConfirmModal extends React.Component {
 		        <h4 className="modal-title santacatalina-font">CONFIRMACIÓN</h4>
 		      </div>
 		      <div className="modal-body row">
+		      	<div className="form-inline form-group">
+	      			<label htmlFor="code"> Iniciales: </label>
+	      			<input required="required" onChange={this.onCodeChange.bind(this)} id="code" className="form-control" type="string" name="code" value={this.state.code} />
+	      		</div>
+
 		      	{
 		   		this.state.cartItems.map((item) => {
 	                return <div key={item.id} className="col-md-12">  
@@ -213,11 +236,12 @@ class ConfirmModal extends React.Component {
 	                </div>
 	              })
 	    		}
-		    	 <p>Total: ${this.state.cartItems.reduce((a, b) => a + b.quantity*b.product.price, 0)}</p>
+		      	
+		      	<p>Total: ${this.state.cartItems.reduce((a, b) => a + b.quantity*b.product.price, 0)}</p>
 		      	
 		      </div>
 		      <div className="modal-footer">
-		      <button type="button" className="btn btn-primary" >Confirmar</button>
+		      	<button onClick={this.confirm} type="button" className="btn btn-primary" >Confirmar</button>
 		        <button type="button" className="btn btn-default" data-dismiss="modal">Volver</button>
 		      </div>
 		    </div>
