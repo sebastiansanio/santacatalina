@@ -169,6 +169,23 @@ class CartItems extends React.Component {
 	}
 }
 
+class ConfirmButton extends React.Component {
+	constructor(props) {
+	    super(props)
+	    this.state = { cartItems: props.cartItems }
+	}
+	componentWillReceiveProps(props){
+		this.setState({cartItems: props.cartItems})
+	}
+	render(){
+		return (
+				<div className="centred">
+				<button className='btn btn-primary santacatalina-button'>CONFIRMAR</button>
+				</div>
+		)
+	}
+}
+
 class Cart extends React.Component {
 	constructor(props) {
 	    super(props)
@@ -182,6 +199,7 @@ class Cart extends React.Component {
 	    <div className="row">
     	<h4 className="santacatalina-font">PEDIDO</h4>
     	 <CartItems cartItems={this.state.cartItems} addProduct={this.props.addProduct} removeProduct={this.props.removeProduct}/>
+    	 {this.state.cartItems.length>0?<ConfirmButton/>:''}
     	</div>
     	)
 	}
