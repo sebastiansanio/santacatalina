@@ -104,7 +104,7 @@ class Categories extends React.Component {
     	{
     		
     		this.state.categories.map((category) => {
-                return <div key={category.id} className="col-md-4">  
+                return <div key={category.id} className="col-md-4 col-xs-6">  
                 <Category category={ category } addProduct={this.props.addProduct}   />
                 </div>
               })
@@ -313,10 +313,10 @@ class App extends React.Component {
 	  return (
 	    <div className="container-fluid row">
 	    <Navbar/>
-	      <div className="col-md-9">
+	      <div className="col-md-9 col-xs-7">
 	        <Categories addProduct={this.addProduct}/>
 	      </div>
-	      <div className="col-md-3 left-border" >
+	      <div className="col-md-3 col-xs-5 left-border" >
 	        <Cart cartItems={this.state.cartItems} addProduct={this.addProduct} removeProduct={this.removeProduct}/>
 	      </div>
 	    </div>
