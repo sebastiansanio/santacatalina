@@ -132,7 +132,7 @@ class CartItem extends React.Component {
 	}
 	render(){ return (
 	    <div className="santacatalina-product-name" >
-	    {this.state.item.product.name.toUpperCase()}: {this.state.item.quantity}
+	    {this.state.item.product.name.toUpperCase()} (${this.state.item.product.price}): {this.state.item.quantity}
 		  <button className="btn btn-default btn-circle" onClick={this.handleAdd.bind(this)}><span className="glyphicon glyphicon-plus glyphicon-notop"></span> </button>
 		  <button className="btn btn-danger btn-circle" onClick={this.handleRemove.bind(this)}><span className="glyphicon glyphicon-minus glyphicon-notop"></span> </button>
 
@@ -180,7 +180,7 @@ class OrderButton extends React.Component {
 	render(){
 		return (
 				<div className="centred">
-				<button data-toggle="modal" data-target="#confirmModal" className='btn btn-default santacatalina-button'>PEDIR</button>
+				<button data-toggle="modal" data-target="#confirmModal" className='btn btn-primary santacatalina-button'>PEDIR</button>
 				<ConfirmModal cartItems={this.state.cartItems}/>
 				</div>
 		)
@@ -213,6 +213,8 @@ class ConfirmModal extends React.Component {
 	                </div>
 	              })
 	    		}
+		    	 <p>Total: ${this.state.cartItems.reduce((a, b) => a + b.quantity*b.product.price, 0)}</p>
+		      	
 		      </div>
 		      <div className="modal-footer">
 		      <button type="button" className="btn btn-primary" >Confirmar</button>
@@ -240,6 +242,8 @@ class Cart extends React.Component {
 	    <div className="row">
     	<h4 className="santacatalina-font">PEDIDO</h4>
     	 <CartItems cartItems={this.state.cartItems} addProduct={this.props.addProduct} removeProduct={this.props.removeProduct}/>
+    	 <p>Total: ${this.state.cartItems.reduce((a, b) => a + b.quantity*b.product.price, 0)}</p>
+    	 
     	 {this.state.cartItems.length>0?<OrderButton cartItems={this.state.cartItems}/>:''}
     	</div>
     	)
