@@ -31,7 +31,7 @@ window.ReadOneProductComponent = React.createClass({
 		  var productId = this.props.productId;
 		    $.ajax({
 		        type: "GET",
-		        url: "http://localhost:8080/api/products/"+productId,
+		        url: "/api/products/"+productId,
 		        contentType: "application/json",
 		        success : function(product) {
 		        		this.setState({id: product.id});

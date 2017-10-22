@@ -12,7 +12,7 @@ window.UpdateCategoryComponent = React.createClass({
 		  var categoryId = this.props.categoryId;
 		    $.ajax({
 		        type: "GET",
-		        url: "http://localhost:8080/api/categories/"+categoryId,
+		        url: "/api/categories/"+categoryId,
 		        contentType: "application/json",
 		        success : function(product) {
 		        		this.setState({id: product.id});
@@ -49,7 +49,7 @@ window.UpdateCategoryComponent = React.createClass({
 	    
 	    $.ajax({
 	        type: "PUT",
-	        url: "http://localhost:8080/api/categories/"+this.state.id,
+	        url: "/api/categories/"+this.state.id,
 	        contentType: "application/json",
 	        data: JSON.stringify(form_data),
 	        success : function(response) {

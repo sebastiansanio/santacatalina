@@ -1,4 +1,4 @@
-package org.kiakaha.santacatalina;
+package org.kiakaha.santacatalina.repositories;
 
 import org.kiakaha.santacatalina.model.Category;
 import org.springframework.data.rest.core.config.Projection;

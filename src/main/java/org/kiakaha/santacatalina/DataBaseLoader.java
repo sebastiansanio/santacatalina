@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import org.kiakaha.santacatalina.model.Category;
 import org.kiakaha.santacatalina.model.Product;
+import org.kiakaha.santacatalina.repositories.CategoryRepository;
+import org.kiakaha.santacatalina.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

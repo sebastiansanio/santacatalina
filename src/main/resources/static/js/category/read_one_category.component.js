@@ -11,7 +11,7 @@ window.ReadOneCategoryComponent = React.createClass({
 		  var categoryId = this.props.categoryId;
 		    $.ajax({
 		        type: "GET",
-		        url: "http://localhost:8080/api/categories/"+categoryId,
+		        url: "/api/categories/"+categoryId,
 		        contentType: "application/json",
 		        success : function(product) {
 		        		this.setState({id: product.id});

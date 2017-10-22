@@ -8,7 +8,7 @@ window.DeleteCategoryComponent = React.createClass({
 	 
 	        $.ajax({
 	        type: "DELETE",
-	        url: "http://localhost:8080/api/categories/"+categoryId,
+	        url: "/api/categories/"+categoryId,
 	        contentType: "application/json",
 	        
 	    });
