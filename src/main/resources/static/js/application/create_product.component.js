@@ -30,18 +30,22 @@ window.CreateProductComponent = React.createClass({
 	 
 	onCategoryChange: function(e) {
 	    this.setState({selectedCategoryId: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
 	},
 	 
 	onNameChange: function(e) {
 	    this.setState({name: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
 	},
 	 
 	onDescriptionChange: function(e) {
 	    this.setState({description: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
 	},
 	 
 	onPriceChange: function(e) {
 	    this.setState({price: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
 	},
 	
 	onImageChange: function(e) {
@@ -51,11 +55,9 @@ window.CreateProductComponent = React.createClass({
 	      var arrayBuffer = reader.result
 	      var bytes = new Uint8Array(arrayBuffer);
 	      var b64encoded = btoa(String.fromCharCode.apply(null, bytes));
-	      document.getElementById("demo").value =  b64encoded.toString();
+	      document.getElementById("image").value =  b64encoded.toString();
 	    }
 	    reader.readAsArrayBuffer(fileData)
-	    
-	    this.setState({image: document.getElementById("demo").value});
 	    
 	},
 	
@@ -66,7 +68,7 @@ window.CreateProductComponent = React.createClass({
 	        description: this.state.description,
 	        price: this.state.price,
 	        category: this.state.selectedCategoryId,
-	        image:document.getElementById("demo").value
+	        image:document.getElementById("image").value
 	    };
 	    console.log(JSON.stringify(form_data))
 	    $.ajax({
@@ -122,16 +124,16 @@ window.CreateProductComponent = React.createClass({
 	 
 	        <a href='#'
 	            onClick={() => this.props.changeAppMode('read')}
-	            className='btn btn-primary margin-bottom-1em'> Read Products
+	            className='btn btn-primary margin-bottom-1em'> Listar Productos
 	        </a>
 	 
 	 
-	            <input type="hidden" name="demo" id="demo" value={this.state.image} />
+	            <input type="hidden" name="image" id="image" value={this.state.image} />
 	        <form>
 	            <table className='table table-bordered table-hover'>
 	            <tbody>
 	                <tr>
-	                    <td>Name</td>
+	                    <td>Nombre</td>
 	                    <td>
 	                        <input
 	                        type='text'
@@ -143,12 +145,11 @@ window.CreateProductComponent = React.createClass({
 	                </tr>
 	 
 	                <tr>
-	                    <td>Description</td>
+	                    <td>Descripción</td>
 	                    <td>
 	                        <textarea
 	                        type='text'
 	                        className='form-control'
-	                        required
 	                        value={this.state.description}
 	                        onChange={this.onDescriptionChange}>
 	                        </textarea>
@@ -156,7 +157,7 @@ window.CreateProductComponent = React.createClass({
 	                </tr>
 	 
 	                <tr>
-	                    <td>Price ($)</td>
+	                    <td>Precio ($)</td>
 	                    <td>
 	                        <input
 	                        type='number'
@@ -169,7 +170,7 @@ window.CreateProductComponent = React.createClass({
 	                </tr>
 	                
 	               <tr>
-                    <td>Category</td>
+                    <td>Categoria</td>
                     <td>
                         <select
                         onChange={this.onCategoryChange}

@@ -6,6 +6,7 @@ window.ReadOneProductComponent = React.createClass({
 	        description: '',
 	        price: 0,
 	        urlCategory: '',
+	        image:'',
 	        category:[]
 	    };
 	},
@@ -38,7 +39,9 @@ window.ReadOneProductComponent = React.createClass({
 		            this.setState({name: product.name});
 		            this.setState({description: product.description});
 		            this.setState({price: product.price});
+		            this.setState({image: product.image});
 		            this.setState({urlCategory: product._links.category.href});
+		            document.getElementById("ItemPreview").src = "data:image/png;base64," + product.image;
 		            this.loadCategory();
 		        }.bind(this),
 		        error: function(xhr, resp, text){
@@ -48,11 +51,10 @@ window.ReadOneProductComponent = React.createClass({
 	  },
 	 
 	componentDidMount: function(){
-	 
 	    this.loadProduct();
-	    
-	    $('.page-header h1').text('Read Product');
+	    $('.page-header h1').text('Listar Productos');
 	},
+	
 	 
 	render: function() {
 		 
@@ -61,7 +63,7 @@ window.ReadOneProductComponent = React.createClass({
 	            <a href='#'
 	                onClick={() => this.props.changeAppMode('read')}
 	                className='btn btn-primary margin-bottom-1em'>
-	                Read Products
+	                Listar Productos
 	            </a>
 	 
 	            <form onSubmit={this.onSave}>
@@ -86,6 +88,11 @@ window.ReadOneProductComponent = React.createClass({
 	                        <td>Category</td>
 	                        <td>{this.state.category.name}</td>
 	                    </tr>
+	                    
+	                    <tr>
+                        <td>imagen</td>
+                        	<td><img id="ItemPreview" src=""/></td>
+                        </tr>
 	 
 	                    </tbody>
 	                </table>

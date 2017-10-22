@@ -8,6 +8,7 @@ window.UpdateProductComponent = React.createClass({
 	        description: '',
 	        price: 0,
 	        successUpdate: null,
+	        image:null,
 	        urlCategory:''
 	       
 	    };
@@ -24,6 +25,8 @@ window.UpdateProductComponent = React.createClass({
 		            this.setState({name: product.name});
 		            this.setState({description: product.description});
 		            this.setState({price: product.price});
+		            this.setState({image: product.image});
+		            document.getElementById("ItemPreview").src = "data:image/png;base64," + product.image;
 		            this.setState({urlCategory: product._links.category.href});
 		           
 		        }.bind(this),
@@ -59,24 +62,42 @@ window.UpdateProductComponent = React.createClass({
 	    this.loadProduct();
 	    this.loadCategories();
 	    
-	    $('.page-header h1').text('Read Product');
+	    $('.page-header h1').text('Listar Productos');
 	},
 	 
 	
 	onCategoryChange: function(e){
 	    this.setState({urlCategory: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
 	},
 	 
 	onNameChange: function(e){
 	    this.setState({name: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
 	},
 	 
 	onDescriptionChange: function(e){
 	    this.setState({description: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
 	},
 	 
 	onPriceChange: function(e){
 	    this.setState({price: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
+	},
+	
+	onImageChange: function(e) {
+		var fileData = new Blob([e.target.files[0]]);
+	    var reader = new FileReader();
+	    reader.onload = function() {
+	      var arrayBuffer = reader.result
+	      var bytes = new Uint8Array(arrayBuffer);
+	      var b64encoded = btoa(String.fromCharCode.apply(null, bytes));
+	      document.getElementById("image").value =  b64encoded.toString();
+	      document.getElementById("ItemPreview").src = "data:image/png;base64," + b64encoded.toString();
+	    }
+	    reader.readAsArrayBuffer(fileData)
+	    
 	},
 	
 	onSave: function(e){
@@ -86,6 +107,7 @@ window.UpdateProductComponent = React.createClass({
 	        name: this.state.name,
 	        description: this.state.description,
 	        price: this.state.price,
+	        image:document.getElementById("image").value,
 	        category:{
 	        		href:this.state.urlCategory
 	        }
@@ -146,12 +168,13 @@ window.UpdateProductComponent = React.createClass({
 	                className='btn btn-primary margin-bottom-1em'>
 	                Read Products
 	            </a>
-	 
+	                
+	             <input type="hidden" name="image" id="image" value={this.state.image} />
 	            <form>
 	                <table className='table table-bordered table-hover'>
 	                    <tbody>
 	                    <tr>
-	                        <td>Name</td>
+	                        <td>Nombre</td>
 	                        <td>
 	                            <input
 	                                type='text'
@@ -163,19 +186,18 @@ window.UpdateProductComponent = React.createClass({
 	                    </tr>
 	 
 	                    <tr>
-	                        <td>Description</td>
+	                        <td>Descripción</td>
 	                        <td>
 	                            <textarea
 	                                type='text'
 	                                className='form-control'
-	                                required
 	                                value={this.state.description}
 	                                onChange={this.onDescriptionChange}></textarea>
 	                        </td>
 	                    </tr>
 	 
 	                    <tr>
-	                        <td>Price ($)</td>
+	                        <td>Precio ($)</td>
 	                        <td>
 	                            <input
 	                                type='number'
@@ -188,7 +210,7 @@ window.UpdateProductComponent = React.createClass({
 	                    </tr>
 	 
 	                    <tr>
-	                        <td>Category</td>
+	                        <td>Categoria</td>
 	                        <td>
 	                            <select
 	                                onChange={this.onCategoryChange}
@@ -199,6 +221,18 @@ window.UpdateProductComponent = React.createClass({
 	                                </select>
 	                        </td>
 	                    </tr>
+	                    
+	                    <tr>
+                        <td>Imagen</td>
+                        	<td><img id="ItemPreview" src=""/>
+	        	                <input 
+	        	                className='form-control' 
+	        	                	onChange={this.onImageChange} 
+	        	                accept=".jpg, .jpeg, .png"
+	        	                type="file" 
+	        	                	name="img"/>
+                        </td>
+                        </tr>
 	 
 	                    <tr>
 	                        <td></td>

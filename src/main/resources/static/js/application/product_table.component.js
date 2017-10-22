@@ -18,11 +18,11 @@ window.ProductsTable = React.createClass({
                 <table className='table table-striped table-hover'>
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Category</th>
-                            <th>Action</th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Precio</th>
+                            <th>Categoria</th>
+                            <th>Acción</th>
                         </tr>
                     </thead>
                     <tbody>

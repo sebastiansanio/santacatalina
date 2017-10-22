@@ -35,15 +35,15 @@ window.ProductRow = React.createClass({
             <td>
                 <a href='#'
                     onClick={() => this.props.changeAppMode('readOne', this.props.product.id)}
-                    className='btn btn-info m-r-1em'> Read One
+                    className='btn btn-info m-r-1em'> Ver
                 </a>
                 <a href='#'
                     onClick={() => this.props.changeAppMode('update', this.props.product.id)}
-                    className='btn btn-primary m-r-1em'> Edit
+                    className='btn btn-primary m-r-1em'> Editar
                 </a>
                 <a
                     onClick={() => this.props.changeAppMode('delete', this.props.product.id)}
-                    className='btn btn-danger'> Delete
+                    className='btn btn-danger'> Eliminar
                 </a>
             </td>
         </tr>
