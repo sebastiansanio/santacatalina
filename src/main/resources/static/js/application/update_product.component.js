@@ -166,7 +166,7 @@ window.UpdateProductComponent = React.createClass({
 	            <a href='#'
 	                onClick={() => this.props.changeAppMode('read')}
 	                className='btn btn-primary margin-bottom-1em'>
-	                Read Products
+	               Listar Productos
 	            </a>
 	                
 	             <input type="hidden" name="image" id="image" value={this.state.image} />
@@ -239,7 +239,7 @@ window.UpdateProductComponent = React.createClass({
 	                        <td>
 	                            <button
 	                                className='btn btn-primary'
-	                                onClick={this.onSave}>Save Changes</button>
+	                                onClick={this.onSave}>Actualizar</button>
 	                        </td>
 	                    </tr>
 	 

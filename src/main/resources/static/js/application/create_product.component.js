@@ -200,7 +200,7 @@ window.CreateProductComponent = React.createClass({
 	                    <td>
 	                        <button
 	                        className='btn btn-primary'
-	                        onClick={this.onSave}>Save</button>
+	                        onClick={this.onSave}>Grabar</button>
 	                    </td>
 	                </tr>
 	                </tbody>
