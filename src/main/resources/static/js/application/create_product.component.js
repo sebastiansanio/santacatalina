@@ -7,6 +7,7 @@ window.CreateProductComponent = React.createClass({
 	        description: '',
 	        price: '',
 	        image:null,
+	        active:true,
 	        successCreation: null
 	    };
 	},
@@ -48,6 +49,15 @@ window.CreateProductComponent = React.createClass({
 	    this.setState({image: document.getElementById("image").value});
 	},
 	
+	onActiveChange: function(e) {
+		if( $('#active').prop('checked') ) {
+			this.setState({active: true});
+		}else{
+			this.setState({active: false});
+		}
+	    this.setState({image: document.getElementById("image").value});
+	},
+	
 	onImageChange: function(e) {
 		var fileData = new Blob([e.target.files[0]]);
 	    var reader = new FileReader();
@@ -67,6 +77,7 @@ window.CreateProductComponent = React.createClass({
 	        name: this.state.name,
 	        description: this.state.description,
 	        price: this.state.price,
+	        active:this.state.active,
 	        category: this.state.selectedCategoryId,
 	        image:document.getElementById("image").value
 	    };
@@ -168,6 +179,19 @@ window.CreateProductComponent = React.createClass({
 	                        onChange={this.onPriceChange}/>
 	                    </td>
 	                </tr>
+	                
+	                <tr>
+                    <td>Habilitado</td>
+                    <td>
+                    		<input 
+                    		type="checkbox" 
+                    		name="active"
+                    		id="active"
+                    		className='form-control'
+        	                value={this.state.active}
+                    		onChange={this.onActiveChange}/>
+                    </td>
+                </tr>
 	                
 	               <tr>
                     <td>Categoria</td>

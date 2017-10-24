@@ -2,6 +2,7 @@ window.ReadOneCategoryComponent = React.createClass({
 	getInitialState: function() {
 	    return {
 	        id: 0,
+	        image:'',
 	        name: ''
 	    };
 	},
@@ -13,9 +14,10 @@ window.ReadOneCategoryComponent = React.createClass({
 		        type: "GET",
 		        url: "/api/categories/"+categoryId,
 		        contentType: "application/json",
-		        success : function(product) {
-		        		this.setState({id: product.id});
-		            this.setState({name: product.name});
+		        success : function(category) {
+		        		this.setState({id: category.id});
+		            this.setState({name: category.name});
+		            document.getElementById("ItemPreview").src = "data:image/png;base64," + category.image;
 		        }.bind(this),
 		        error: function(xhr, resp, text){
 		            console.log(xhr, resp, text);
@@ -47,6 +49,11 @@ window.ReadOneCategoryComponent = React.createClass({
 	                        <td>Name</td>
 	                        <td>{this.state.name}</td>
 	                    </tr>
+	                    
+	                    <tr>
+                        <td>imagen</td>
+                        	<td><img id="ItemPreview" src=""/></td>
+                        </tr>
 	 
 	                    </tbody>
 	                </table>

@@ -7,6 +7,7 @@ window.ReadOneProductComponent = React.createClass({
 	        price: 0,
 	        urlCategory: '',
 	        image:'',
+	        active:null,
 	        category:[]
 	    };
 	},
@@ -40,6 +41,11 @@ window.ReadOneProductComponent = React.createClass({
 		            this.setState({description: product.description});
 		            this.setState({price: product.price});
 		            this.setState({image: product.image});
+		            if(product.active == true){
+		            		document.getElementById("active").checked = true;
+		            }else{
+		            		document.getElementById("active").checked = false;
+		            }
 		            this.setState({urlCategory: product._links.category.href});
 		            document.getElementById("ItemPreview").src = "data:image/png;base64," + product.image;
 		            this.loadCategory();
@@ -83,6 +89,19 @@ window.ReadOneProductComponent = React.createClass({
 	                        <td>Price ($)</td>
 	                        <td>${parseFloat(this.state.price).toFixed(2)}</td>
 	                    </tr>
+	                    
+	                    <tr>
+                        		<td>Habilitado</td>
+                        		<td>
+                        		
+                        		<input 
+                        			type="checkbox" 
+                            		name="active"
+                            		id="active"
+                            		className='form-control'
+                            		/>
+                            	</td>
+                        </tr>
 	 
 	                    <tr>
 	                        <td>Category</td>

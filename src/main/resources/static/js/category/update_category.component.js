@@ -3,6 +3,7 @@ window.UpdateCategoryComponent = React.createClass({
 	    return {
 	        id: 0,
 	        name: '',
+	        image:null,
 	        successUpdate: null
 	       
 	    };
@@ -14,9 +15,11 @@ window.UpdateCategoryComponent = React.createClass({
 		        type: "GET",
 		        url: "/api/categories/"+categoryId,
 		        contentType: "application/json",
-		        success : function(product) {
-		        		this.setState({id: product.id});
-		            this.setState({name: product.name});
+		        success : function(category) {
+		        		this.setState({id: category.id});
+		            this.setState({name: category.name});
+		            document.getElementById("ItemPreview").src = "data:image/png;base64," + category.image;
+
 		           
 		        }.bind(this),
 		        error: function(xhr, resp, text){
@@ -37,14 +40,29 @@ window.UpdateCategoryComponent = React.createClass({
 	
 	onNameChange: function(e){
 	    this.setState({name: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
 	},
 	 
+	onImageChange: function(e) {
+		var fileData = new Blob([e.target.files[0]]);
+	    var reader = new FileReader();
+	    reader.onload = function() {
+	      var arrayBuffer = reader.result
+	      var bytes = new Uint8Array(arrayBuffer);
+	      var b64encoded = btoa(String.fromCharCode.apply(null, bytes));
+	      document.getElementById("image").value =  b64encoded.toString();
+	      document.getElementById("ItemPreview").src = "data:image/png;base64," + b64encoded.toString();
+	    }
+	    reader.readAsArrayBuffer(fileData)
+	    
+	},
 	
 	onSave: function(e){
 	 
 	    var form_data={
 	        id: this.state.id,
 	        name: this.state.name,
+	        image:document.getElementById("image").value
 	    };
 	    
 	    $.ajax({
@@ -91,7 +109,7 @@ window.UpdateCategoryComponent = React.createClass({
 	                className='btn btn-primary margin-bottom-1em'>
 	                Listas categorias
 	            </a>
-	 
+	                <input type="hidden" name="image" id="image" value={this.state.image} />
 	            <form>
 	                <table className='table table-bordered table-hover'>
 	                    <tbody>
@@ -106,6 +124,18 @@ window.UpdateCategoryComponent = React.createClass({
 	                                onChange={this.onNameChange} />
 	                        </td>
 	                    </tr>
+	                    
+	                    <tr>
+                        <td>Imagen</td>
+                        	<td><img id="ItemPreview" src=""/>
+	        	                <input 
+	        	                className='form-control' 
+	        	                	onChange={this.onImageChange} 
+	        	                accept=".jpg, .jpeg, .png"
+	        	                type="file" 
+	        	                	name="img"/>
+                        </td>
+                        </tr>
 	 
 	 
 	                    <tr>

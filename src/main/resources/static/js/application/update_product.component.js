@@ -26,6 +26,11 @@ window.UpdateProductComponent = React.createClass({
 		            this.setState({description: product.description});
 		            this.setState({price: product.price});
 		            this.setState({image: product.image});
+		            if(product.active == true){
+	            			document.getElementById("active").checked = true;
+		            }else{
+		            		document.getElementById("active").checked = false;
+		            }
 		            document.getElementById("ItemPreview").src = "data:image/png;base64," + product.image;
 		            this.setState({urlCategory: product._links.category.href});
 		           
@@ -80,6 +85,15 @@ window.UpdateProductComponent = React.createClass({
 	    this.setState({description: e.target.value});
 	    this.setState({image: document.getElementById("image").value});
 	},
+	
+	onActiveChange: function(e) {
+		if( $('#active').prop('checked') ) {
+			this.setState({active: true});
+		}else{
+			this.setState({active: false});
+		}
+	    this.setState({image: document.getElementById("image").value});
+	},
 	 
 	onPriceChange: function(e){
 	    this.setState({price: e.target.value});
@@ -107,6 +121,7 @@ window.UpdateProductComponent = React.createClass({
 	        name: this.state.name,
 	        description: this.state.description,
 	        price: this.state.price,
+	        active: this.state.active,
 	        image:document.getElementById("image").value,
 	        category:{
 	        		href:this.state.urlCategory
@@ -221,6 +236,18 @@ window.UpdateProductComponent = React.createClass({
 	                                </select>
 	                        </td>
 	                    </tr>
+	                    
+	                    <tr>
+                        <td>Habilitado</td>
+                        <td>
+                        <input 
+		                		type="checkbox" 
+		                		name="active"
+		                		id="active"
+		                		className='form-control'
+		                		onChange={this.onActiveChange}/>
+                        </td>
+                    </tr>
 	                    
 	                    <tr>
                         <td>Imagen</td>

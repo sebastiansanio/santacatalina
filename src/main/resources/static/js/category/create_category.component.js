@@ -2,6 +2,7 @@ window.CreateCategoryComponent = React.createClass({
 	getInitialState: function() {
 	    return {
 	        name: '',
+	        image:null,
 	        successCreation: null
 	    };
 	},
@@ -10,6 +11,20 @@ window.CreateCategoryComponent = React.createClass({
 	 
 	onNameChange: function(e) {
 	    this.setState({name: e.target.value});
+	    this.setState({image: document.getElementById("image").value});
+	},
+	
+	onImageChange: function(e) {
+		var fileData = new Blob([e.target.files[0]]);
+	    var reader = new FileReader();
+	    reader.onload = function() {
+	      var arrayBuffer = reader.result
+	      var bytes = new Uint8Array(arrayBuffer);
+	      var b64encoded = btoa(String.fromCharCode.apply(null, bytes));
+	      document.getElementById("image").value =  b64encoded.toString();
+	    }
+	    reader.readAsArrayBuffer(fileData)
+	    
 	},
 	 
 	
@@ -17,6 +32,7 @@ window.CreateCategoryComponent = React.createClass({
 	 
 	    var form_data={
 	        name: this.state.name,
+	        image:document.getElementById("image").value
 	    };
 	    
 	    
@@ -67,6 +83,7 @@ window.CreateCategoryComponent = React.createClass({
 	            className='btn btn-primary margin-bottom-1em'> Listar Categorias
 	        </a>
 	 
+	            <input type="hidden" name="image" id="image" value={this.state.image} />
 	 
 	        <form>
 	            <table className='table table-bordered table-hover'>
@@ -82,6 +99,17 @@ window.CreateCategoryComponent = React.createClass({
 	                        onChange={this.onNameChange} />
 	                    </td>
 	                </tr>
+	                <tr>
+	                <td>Imagen</td>
+		                <td>
+			                <input 
+			                className='form-control' 
+			                	onChange={this.onImageChange} 
+			                accept=".jpg, .jpeg, .png"
+			                type="file" 
+			                	name="img"/>
+		                </td>
+		            </tr>
 	                
 	 
 	                <tr>
@@ -92,6 +120,7 @@ window.CreateCategoryComponent = React.createClass({
 	                        onClick={this.onSave}>Save</button>
 	                    </td>
 	                </tr>
+	                
 	                </tbody>
 	            </table>
 	        </form>
