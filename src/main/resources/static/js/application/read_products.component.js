@@ -8,9 +8,9 @@ window.ReadProductsComponent = React.createClass({
     loadProductsFromServer: function () {
 	    var self = this;
 	    if(this.props.name == '' ){
-	    		var url = "/api/products"
+	    		var url = "/api/products?size=500"
 	    }else{
-	    		var url = "/api/products/search/findByNameContainingIgnoreCase?name="+this.props.name
+	    		var url = "/api/products/search/findByNameContainingIgnoreCase?name="+this.props.name+"&size=500"
 	    }
 	    $.ajax({
 	      url: url

@@ -12,6 +12,9 @@ window.DeleteProductComponent = React.createClass({
 	        contentType: "application/json",
 	        
 	    });
+	    
+	    this.props.changeAppMode('read')
+	    
 	},
 	render: function(){
 		 
