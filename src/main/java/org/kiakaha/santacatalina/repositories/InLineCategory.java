@@ -9,4 +9,5 @@ public interface InLineCategory {
 	Long getId();
 	String getName();
 	boolean isActive();
+	byte[] getImage();
 }

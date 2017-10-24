@@ -18,9 +18,7 @@ window.UpdateCategoryComponent = React.createClass({
 		        success : function(category) {
 		        		this.setState({id: category.id});
 		            this.setState({name: category.name});
-		            document.getElementById("ItemPreview").src = "data:image/png;base64," + category.image;
-
-		           
+			        document.getElementById("ItemPreview").src = "data:image/png;base64," + category.image;
 		        }.bind(this),
 		        error: function(xhr, resp, text){
 		            console.log(xhr, resp, text);
@@ -58,7 +56,7 @@ window.UpdateCategoryComponent = React.createClass({
 	},
 	
 	onSave: function(e){
-	 
+		
 	    var form_data={
 	        id: this.state.id,
 	        name: this.state.name,

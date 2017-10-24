@@ -30,10 +30,10 @@ public class Category {
 	public Category() {
 	}
 
-	public Category(String name, boolean active) {
+	public Category(String name, boolean active, byte[] image) {
 		this.name = name;
 		this.active = active;
-
+		this.image = image;
 	}
 	
 	@OneToMany(fetch=FetchType.EAGER, cascade=CascadeType.ALL)
