@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import lombok.Data;
 
@@ -16,6 +17,10 @@ public class OrderItem {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
+	@ManyToOne
+	private Product product;
+	
 	private String nameProduct;
 	@ManyToOne
 	private Order order;
