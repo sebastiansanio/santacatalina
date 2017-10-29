@@ -16,23 +16,34 @@ public class OrderItem {
 	@Id
 	@GeneratedValue
 	private Long id;
-	@ManyToOne
-	private Product product;
+	private String nameProduct;
 	@ManyToOne
 	private Order order;
 	private BigDecimal quantity;
 	private BigDecimal price;
+	
+	
+	public OrderItem() {
+	}
+
+	public OrderItem(BigDecimal quantity, BigDecimal price, String nameProduct,Order order) {
+		this.quantity = quantity;
+		this.price = price;
+		this.nameProduct = nameProduct;
+		this.order = order;
+	}
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Product getProduct() {
-		return product;
+	public String getNameProduct() {
+		return nameProduct;
 	}
-	public void setProduct(Product product) {
-		this.product = product;
+	public void setNameProduct(String nameProduct) {
+		this.nameProduct = nameProduct;
 	}
 	public Order getOrder() {
 		return order;

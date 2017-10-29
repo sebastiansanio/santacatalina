@@ -1,10 +1,17 @@
 package org.kiakaha.santacatalina;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.kiakaha.santacatalina.model.Category;
+import org.kiakaha.santacatalina.model.Order;
+import org.kiakaha.santacatalina.model.OrderItem;
 import org.kiakaha.santacatalina.model.Product;
 import org.kiakaha.santacatalina.repositories.CategoryRepository;
+import org.kiakaha.santacatalina.repositories.OrderItemRepository;
+import org.kiakaha.santacatalina.repositories.OrderRepository;
 import org.kiakaha.santacatalina.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,11 +22,15 @@ public class DataBaseLoader implements CommandLineRunner {
 
 	private final ProductRepository productRepository;
 	private final CategoryRepository categoryRepository;
+	private final OrderRepository orderRepository;
+	private final OrderItemRepository orderItemRepository;
 
 	@Autowired
-	public DataBaseLoader(ProductRepository productRepository, CategoryRepository categoryRepository) {
+	public DataBaseLoader(OrderItemRepository orderItemRepository,ProductRepository productRepository, CategoryRepository categoryRepository,OrderRepository orderRepository) {
 		this.productRepository = productRepository;
 		this.categoryRepository = categoryRepository;
+		this.orderRepository = orderRepository;
+		this.orderItemRepository = orderItemRepository;
 	}
 
 	@Override
@@ -95,7 +106,8 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.productRepository.save(new Product("Salmon Crudo y Brie", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches,a2));
 		this.productRepository.save(new Product("Vegetariano", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches,a2));
 		this.productRepository.save(new Product("Wrap Clasico", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches,a2));
-		this.productRepository.save(new Product("Wrap de Atun", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches,a2));
+		Product product = new Product("Wrap de Atun", BigDecimal.valueOf(95.00), "", true, false, categoryColdSandwiches,a2);
+		this.productRepository.save(product);
 
 
 		Category categoryDrinks = new Category("Bebidas", true,a2);
@@ -110,7 +122,19 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.productRepository.save(new Product("PDT Pomelo", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks,a2));
 		this.productRepository.save(new Product("PDT Pomelo free", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks,a2));
 		this.productRepository.save(new Product("Agua con Gas", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks,a2));
-
+		
+		for(int i =0 ; i<100 ; i++) {
+			List<OrderItem> listItems = new ArrayList<OrderItem>();
+			Order order = new Order("IV1",false,new Date(),i);
+			this.orderRepository.save(order);
+			for(int j = 0 ; j< 4; j++) {
+				OrderItem orderItem = new OrderItem(BigDecimal.valueOf(1.00),BigDecimal.valueOf(40.00),product.getName(),order);
+				this.orderItemRepository.save(orderItem);
+				listItems.add(orderItem);
+			}
+			order.setItems(listItems);
+			this.orderRepository.save(order);
+		}
 
 	}
 }

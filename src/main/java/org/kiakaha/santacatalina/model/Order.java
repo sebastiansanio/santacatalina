@@ -20,12 +20,24 @@ public class Order {
 	@Id
 	@GeneratedValue
 	private Long id;
+	
 	@OneToMany
 	private List<OrderItem> items;
 	
 	private String code;
 	private Date date;
 	private long number;
+	private boolean status;
+	
+	public Order() {
+	}
+
+	public Order(String code, boolean status, Date date, long number) {
+		this.code = code;
+		this.status = status;
+		this.date = date;
+		this.number = number;
+	}
 	
 	public Long getId() {
 		return id;
@@ -56,6 +68,12 @@ public class Order {
 	}
 	public void setNumber(long number) {
 		this.number = number;
+	}
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
 	}
 	
 }
