@@ -41,7 +41,6 @@ window.ReadListOrdersComponent = React.createClass({
                 <ListOrdersTable
                     listOrders={filteredListOrders}
                     changeAppMode={this.props.changeAppMode} />
-                <TopActionsComponent changeAppMode={this.props.changeAppMode} />
             </div>
         );
     }

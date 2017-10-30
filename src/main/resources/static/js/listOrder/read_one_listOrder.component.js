@@ -16,7 +16,7 @@ window.ReadOneListOrderComponent = React.createClass({
 	            <a href='#'
 	                onClick={() => this.props.changeAppMode('read')}
 	                className='btn btn-primary margin-bottom-1em'>
-	                Detalle Pedido
+	                Listar Pedidos
 	            </a>
 	 
 	                <ListItemsTable

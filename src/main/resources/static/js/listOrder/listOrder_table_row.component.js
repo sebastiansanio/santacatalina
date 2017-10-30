@@ -6,7 +6,7 @@ window.ListOrderRow = React.createClass({
             <td>{this.props.order.code}</td>
             <td>{!this.props.order.status ? 'Sin confirmar': 'Confirmado'}</td>
             <td>{this.props.order.items.length}</td>
-            <td>{this.props.order.date}</td>
+            <td>{this.props.order.date.substring(0,10)}</td>
             <td>
                 <a href='#'
                     onClick={() => this.props.changeAppMode('readOne', this.props.order.id, this.props.order.items)}
