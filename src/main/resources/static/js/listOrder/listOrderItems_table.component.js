@@ -52,7 +52,7 @@ window.ListItemsTable = React.createClass({
 	        }
 	    });
 	    
-	    event.preventDefault();
+	    this.props.changeAppMode('read')
 	 
 	},
 	
@@ -81,7 +81,7 @@ window.ListItemsTable = React.createClass({
 		        }
 		    });
 		    
-		    event.preventDefault();
+		    this.props.changeAppMode('read')
 		 
 		},
 	
@@ -95,6 +95,7 @@ window.ListItemsTable = React.createClass({
                     changeAppMode={this.props.changeAppMode} />
             );
         }.bind(this));
+    
  
         return(
             !rows.length
@@ -112,6 +113,11 @@ window.ListItemsTable = React.createClass({
 	                    </thead>
 	                    <tbody>
 	                        {rows}
+	                        <tr>
+	                        <td><strong>TOTAL</strong></td>
+	                        <td><strong>${this.props.items.reduce((a, b) => a + b.price+b.price, 0)}</strong></td>
+	                        <td></td>
+	                    </tr>
 	                    </tbody>
 	                    
 	                </table>
