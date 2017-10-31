@@ -79,25 +79,19 @@ var Home = React.createClass({
                 <div className="jumbotron">
                     <div className="container">
                         <h1>Santa Catalina</h1>
-                        <p>El secreto radica siempre en la definición y en la búsqueda de los más altos 
-                        estándares. Radica en la decisión de desechar lo promedio, 
-                        enfocándonos en lo que verdaderamente nos vuelve únicos. 
-                        En Santa Catalina estamos convencidos que la comida es la piedra angular del rendimiento diario de cada persona, debido a esto
-                        utilizamos productos especialmente seleccionados para elaborar nuestra comida.</p>
+                        <p>Nuestro compromiso es hacer comida sana y accesible para todos
+Nos gusta incorporar la mayor cantidad de alimentos orgánicos posibles apoyando a productores locales, nuestros propios cultivos y cooperativas
+Nos gusta compartir con ustedes las últimas tendencias en comida sana y estilos de vida saludables
+Nos encanta comer, comida de verdad.</p>
                     </div>
                 </div>
                 <div className="container">
                      <div className="row">
                          <div className="col-md-6">
                              <h2>Comida</h2>
-                             <p>La comida real no está bañada en un innatural glaseado de azúcar que te hace ver las estrellas. 
-                             La comida real no está ideada para corromper tu cuerpo, taponarte las arterias y causarte diabetes. 
-                             Por el contrario, está ideada para ser tu combustible. Está ideada para sostener tus funciones internas, 
-                             ayudándote a alcanzar la máxima performance física y mental.
-                             El 95% de lo que encontrarás en el supermercado es basura. 
-                             Derivados de derivados, repletos de químicos, insecticidas, 
-                             azúcares agregados, insumos industriales, y demás componentes nocivos para tu salud.
-                             Por esto es que en Santa Catalina nos gusta incorporar la mayor cantidad de alimentos orgánicos posibles apoyando a productores locales, nuestros propios cultivos y cooperativas.
+                             <p>Entendemos que la comida tiene un rol muy importante en nuestra salud y nuestro estado de vida en general.
+Nuestra propuesta está vinculada con llevar comida rica, casera y saludable a nuestros clientes. Como objetivo queremos mostrarles que la comida sana y rica puede estar en un mismo plato. Cocinamos de la manera que vos cocinarías si tuvieras más tiempo, un jardín, una cocina grande y un chef profesional.
+Para garantizar que nuestros clientes siempre pueden tener variedad de opciones hacemos un plato del día diferente y lo complementamos con variedades de sándwiches calientes y fríos, ensaladas, tartas y wraps. Ofrecemos variedad de jugos naturales, sanos y frescos del día. Nuestros postres y cosas dulces son un mimo para el goloso que todos llevamos dentro.
                              </p>                         
                              </div>
                          <div className="col-md-6">
