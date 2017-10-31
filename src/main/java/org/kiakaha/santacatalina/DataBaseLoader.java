@@ -35,7 +35,7 @@ public class DataBaseLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... strings) throws Exception {
-		byte[] a2 = new byte[99999];
+		byte[] a2 = new byte[1];
 		Category categorySalad = new Category("Ensalada", true,a2);
 		this.categoryRepository.save(categorySalad);
 		this.productRepository.save(new Product("Cesar", BigDecimal.valueOf(95.00), "", true, false, categorySalad,a2));

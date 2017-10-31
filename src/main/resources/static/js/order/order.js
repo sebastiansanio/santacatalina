@@ -172,16 +172,16 @@ class CartItems extends React.Component {
 class OrderButton extends React.Component {
 	constructor(props) {
 	    super(props)
-	    this.state = { cartItems: props.cartItems }
+	    this.state = { cartItems: props.cartItems, discount: props.discount }
 	}
 	componentWillReceiveProps(props){
-		this.setState({cartItems: props.cartItems})
+		this.setState({cartItems: props.cartItems, discount: props.discount})
 	}
 	render(){
 		return (
 				<div className="centred">
 				<button data-toggle="modal" data-target="#confirmModal" className='btn btn-primary santacatalina-button'>PEDIR</button>
-				<ConfirmModal cartItems={this.state.cartItems}/>
+				<ConfirmModal cartItems={this.state.cartItems} discount={this.state.discount}/>
 				</div>
 		)
 	}
@@ -190,11 +190,11 @@ class OrderButton extends React.Component {
 class ConfirmModal extends React.Component {
 	constructor(props){
 		super(props)
-		this.state = {cartItems: props.cartItems, code: ''}
+		this.state = {cartItems: props.cartItems, code: '', discount: props.discount}
 		this.confirm = this.confirm.bind(this);
 	}
 	componentWillReceiveProps(props){
-		this.setState({cartItems: props.cartItems})
+		this.setState({cartItems: props.cartItems, discount: props.discount})
 	}
 	confirm(){
 		var order = new Object();
@@ -236,8 +236,8 @@ class ConfirmModal extends React.Component {
 	                </div>
 	              })
 	    		}
-		      	
-		      	<p>Total: ${this.state.cartItems.reduce((a, b) => a + b.quantity*b.product.price, 0)}</p>
+		    	<p>Descuento menú: ${this.state.discount}</p>
+		      	<p>Total: ${this.state.cartItems.reduce((a, b) => a + b.quantity*b.product.price, 0) - this.state.discount}</p>
 		      	
 		      </div>
 		      <div className="modal-footer">
@@ -253,22 +253,68 @@ class ConfirmModal extends React.Component {
 	
 }
 
+
+function calculateDiscount(cartItems){
+	var discount = 0
+	var dishes = new Array("Ensalada","Sandwich Calientes","Tarta","Sandwich Frio")
+	var dishesQuantity = 0
+	
+	var desserts = new Array("Postres")
+	var desertsQuantity = 0
+	
+	var juices = new Array("Jugos")
+	var juicesQuantity = 0
+	
+	var drinks = new Array("Bebidas")
+	var drinksQuantity = 0
+	
+	for (var i=0;i<cartItems.length;i++){
+		if(dishes.includes(cartItems[i].product.category.name)){
+			dishesQuantity = dishesQuantity + cartItems[i].quantity
+		}
+		if(desserts.includes(cartItems[i].product.category.name)){
+			desertsQuantity = desertsQuantity + cartItems[i].quantity
+		}
+		if(juices.includes(cartItems[i].product.category.name)){
+			juicesQuantity = juicesQuantity + cartItems[i].quantity
+		}
+		if(drinks.includes(cartItems[i].product.category.name)){
+			drinksQuantity = drinksQuantity + cartItems[i].quantity
+		}
+	}
+	while(dishesQuantity > 0 && desertsQuantity > 0 && juicesQuantity > 0){
+		discount = discount + 15
+		dishesQuantity = dishesQuantity - 1
+		desertsQuantity = desertsQuantity - 1
+		juicesQuantity = juicesQuantity - 1
+		
+	}
+	while(dishesQuantity > 0 && desertsQuantity > 0 && drinksQuantity > 0){
+		discount = discount + 15
+		dishesQuantity = dishesQuantity - 1
+		desertsQuantity = desertsQuantity - 1
+		drinksQuantity = drinksQuantity - 1
+	}
+	return discount
+}
+
 class Cart extends React.Component {
 	constructor(props) {
 	    super(props)
-	    this.state = { cartItems: props.cartItems }
+	    this.state = { cartItems: props.cartItems, discount: calculateDiscount(props.cartItems) }
 	}
 	componentWillReceiveProps(props){
-		this.setState({cartItems: props.cartItems})
+		this.setState({cartItems: props.cartItems,discount: calculateDiscount(props.cartItems)})
 	}
 	render(){ 
 		return (
 	    <div className="row">
     	<h4 className="santacatalina-font">PEDIDO</h4>
     	 <CartItems cartItems={this.state.cartItems} addProduct={this.props.addProduct} removeProduct={this.props.removeProduct}/>
-    	 <p>Total: ${this.state.cartItems.reduce((a, b) => a + b.quantity*b.product.price, 0)}</p>
+    	 <p>Descuento menú: ${this.state.discount}</p>
+    	 <p>Total: ${this.state.cartItems.reduce((a, b) => a + b.quantity*b.product.price, 0) - this.state.discount}</p>
     	 
-    	 {this.state.cartItems.length>0?<OrderButton cartItems={this.state.cartItems}/>:''}
+    	 {this.state.cartItems.length>0?<OrderButton cartItems={this.state.cartItems} discount={this.state.discount}/>:''}
     	</div>
     	)
 	}
