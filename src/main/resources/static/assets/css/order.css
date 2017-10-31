@@ -46,3 +46,21 @@
 .centred {
 	text-align: center;
 }
+
+#ENSALADA {
+	background-image: url("/assets/images/cat_ensalada.jpg");
+	background-size: cover;
+	color: black;
+}
+
+#SANDWICHFRIO {
+	background-image: url("/assets/images/cat_sandwich_frio.jpg");
+	background-size: cover;
+	color: black;
+}
+
+#POSTRES {
+	background-image: url("/assets/images/cat_postre.jpg");
+	background-size: cover;
+	color: black;
+}

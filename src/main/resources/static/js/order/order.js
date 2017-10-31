@@ -104,7 +104,7 @@ class Categories extends React.Component {
     	{
     		
     		this.state.categories.map((category) => {
-                return <div key={category.id} className="col-md-4 col-xs-6">  
+                return <div key={category.id} className="col-md-4 col-xs-6"  id={category.name.replace(/\s/g,'').toUpperCase()}>  
                 <Category category={ category } addProduct={this.props.addProduct}   />
                 </div>
               })
