@@ -14,10 +14,6 @@ window.CategoryRow = React.createClass({
                     onClick={() => this.props.changeAppMode('update', this.props.category.id)}
                     className='btn btn-primary m-r-1em'> Edit
                 </a>
-                <a
-                    onClick={() => this.props.changeAppMode('delete', this.props.category.id)}
-                    className='btn btn-danger'> Delete
-                </a>
             </td>
         </tr>
         );

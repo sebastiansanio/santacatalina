@@ -1,37 +1,51 @@
 window.ProductRow = React.createClass({
-	getInitialState: function() {
-        return {
-            category: []
-        };
-    },
+	
+	onSave: function(e){
+	    var form_data={
+	        id: this.props.product.id,
+	        name: this.props.product.name,
+	        description: this.props.product.description,
+	        price: this.props.product.price,
+	        active: jQuery(e.target).is(":checked"),
+	        image:this.props.product.image,
+	        category:{
+	        		href:this.props.product._links.category.href
+	        }
+	    };
+	    
+	    $.ajax({
+	        type: "PUT",
+	        url: "/api/products/"+this.props.product.id,
+	        contentType: "application/json",
+	        data: JSON.stringify(form_data),
+	        success : function(response) {
+		        this.setState({successUpdate: "El producto fue actualizado correctamente"});
+		    
+	        }.bind(this),
+	        error: function(xhr, resp, text){
+	        		this.setState({successUpdate: "No se pudo actualizar el producto"});
+	            console.log(xhr, resp, text);
+	        }
+	    });
+	    
+	    this.props.changeAppMode('read', this.props.product.id)
+	},
     
-    loadProductsFromServer: function () {
-    	 	var self = this;
-	    	$.ajax({
-		        type: "GET",
-		        url: this.props.product._links.category.href,
-		        contentType: "application/json",
-		        success : function(category) {
-		        	 this.setState({
-		        		 category: category
-		 	        });
-		        }.bind(this),
-		        error: function(xhr, resp, text){
-		            console.log(xhr, resp, text);
-		        }
-		    });
-	  },
- 
-    componentDidMount: function() {
-    		this.loadProductsFromServer();
-    },
     render: function() {
     return (
         <tr>
             <td>{this.props.product.name}</td>
             <td>{this.props.product.description}</td>
             <td>${parseFloat(this.props.product.price).toFixed(2)}</td>
-            <td>{this.state.category.name}</td>
+            <td>{this.props.product.active ? 'Habilitado':'Deshabilitado'}</td>
+            <td>{this.props.product.category.name}</td>
+            <td><input 
+		    		type="checkbox" 
+	        		name="active"
+	        		id="active"
+	        		className='form-control'
+	        		defaultChecked={this.props.product.active}
+	        		onChange={this.onSave}/></td>
             <td>
                 <a href='#'
                     onClick={() => this.props.changeAppMode('readOne', this.props.product.id)}
@@ -40,10 +54,6 @@ window.ProductRow = React.createClass({
                 <a href='#'
                     onClick={() => this.props.changeAppMode('update', this.props.product.id)}
                     className='btn btn-primary m-r-1em'> Editar
-                </a>
-                <a
-                    onClick={() => this.props.changeAppMode('delete', this.props.product.id)}
-                    className='btn btn-danger'> Eliminar
                 </a>
             </td>
         </tr>

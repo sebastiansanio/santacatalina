@@ -19,6 +19,7 @@ window.ListOrdersTable = React.createClass({
                             <th>Codigo</th>
                             <th>Estado</th>
                             <th>Cantidad Items</th>
+                            <th>Confirmar/Desconfirmar</th>
                             <th>Fecha</th>
                             <th>Accion</th>
                         </tr>

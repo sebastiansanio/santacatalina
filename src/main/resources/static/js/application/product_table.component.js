@@ -21,7 +21,9 @@ window.ProductsTable = React.createClass({
                             <th>Nombre</th>
                             <th>Descripción</th>
                             <th>Precio</th>
+                            <th>Estado</th>
                             <th>Categoria</th>
+                            <th>Habilitar/Deshabilitar</th>
                             <th>Acción</th>
                         </tr>
                     </thead>

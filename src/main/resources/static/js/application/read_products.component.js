@@ -8,7 +8,7 @@ window.ReadProductsComponent = React.createClass({
     loadProductsFromServer: function () {
 	    var self = this;
 	    if(this.props.name == '' ){
-	    		var url = "/api/products?size=500"
+	    		var url = "/api/products?size=10000"
 	    }else{
 	    		var url = "/api/products/search/findByNameContainingIgnoreCase?name="+this.props.name+"&size=500"
 	    }
