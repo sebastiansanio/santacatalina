@@ -44,7 +44,7 @@ window.ProductRow = React.createClass({
 	        		name="active"
 	        		id="active"
 	        		className='form-control'
-	        		defaultChecked={this.props.product.active}
+	        		checked={this.props.product.active}
 	        		onChange={this.onSave}/></td>
             <td>
                 <a href='#'

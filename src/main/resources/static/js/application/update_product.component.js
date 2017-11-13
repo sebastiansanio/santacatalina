@@ -32,7 +32,7 @@ window.UpdateProductComponent = React.createClass({
 		            		document.getElementById("active").checked = false;
 		            }
 		            document.getElementById("ItemPreview").src = "data:image/png;base64," + product.image;
-		            this.setState({urlCategory: product._links.category.href});
+		            this.setState({urlCategory: product._embedded.category.id});
 		           
 		        }.bind(this),
 		        error: function(xhr, resp, text){
@@ -48,7 +48,7 @@ window.UpdateProductComponent = React.createClass({
 		  var self = this;
 	 	 	$.ajax({
 		        type: "GET",
-		        url: "/api/products",
+		        url: "/api/products?size=1000",
 		        contentType: "application/json",
 		        success : function(data) {
 		        	 this.setState({
@@ -122,11 +122,9 @@ window.UpdateProductComponent = React.createClass({
 	        description: this.state.description,
 	        price: this.state.price,
 	        active: this.state.active,
-	        image:document.getElementById("image").value,
-	        category:{
-	        		href:this.state.urlCategory
-	        }
+	        image:document.getElementById("image").value
 	    };
+	    
 	    
 	    $.ajax({
 	        type: "PUT",
@@ -134,6 +132,20 @@ window.UpdateProductComponent = React.createClass({
 	        contentType: "application/json",
 	        data: JSON.stringify(form_data),
 	        success : function(response) {
+		        	 $.ajax({
+		     	        type: "PUT",
+		     	        url: "/api/products/"+this.state.id+"/category",
+		     	        contentType: "text/uri-list",
+		     	        data: "http://localhost:8080/api/categories/"+this.state.urlCategory,
+		     	        success : function(response) {
+		     		        this.setState({successUpdate: "El producto fue actualizado correctamente"});
+		     		    
+		     	        }.bind(this),
+		     	        error: function(xhr, resp, text){
+		     	        		this.setState({successUpdate: "No se pudo actualizar el producto"});
+		     	            console.log(xhr, resp, text);
+		     	        }
+		     	    });
 		        this.setState({successUpdate: "El producto fue actualizado correctamente"});
 		    
 	        }.bind(this),
@@ -153,7 +165,7 @@ window.UpdateProductComponent = React.createClass({
 			if(jQuery.inArray( category.category.name, map )== -1){
 				map.push(category.category.name);
 				return (
-						<option key={category._links.category.href} value={category._links.category.href}>{category.category.name}</option>
+						<option key={category.category.id} value={category.category.id}>{category.category.name}</option>
 				);
 			}else{
 				
