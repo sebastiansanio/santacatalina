@@ -19,7 +19,7 @@ var Navbar = React.createClass({
                             <li className=""><a href="/listOrderView.html">Pedidos</a></li>
                         </ul>
                         <ul className="nav navbar-nav navbar-right">
-                            <li><a href="/login.html">Login</a></li>
+                            <li><a href="/logout">Logout</a></li>
                         </ul>
                     </div>
                 </div>
