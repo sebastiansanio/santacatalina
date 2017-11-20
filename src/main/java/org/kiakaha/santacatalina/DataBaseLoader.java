@@ -123,7 +123,7 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.productRepository.save(new Product("PDT Pomelo free", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks,a2));
 		this.productRepository.save(new Product("Agua con Gas", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks,a2));
 		
-		for(int i =0 ; i<100 ; i++) {
+		for(int i =0 ; i<100000 ; i++) {
 			List<OrderItem> listItems = new ArrayList<OrderItem>();
 			Order order = new Order("IV"+i,false,new Date(),i);
 			this.orderRepository.save(order);

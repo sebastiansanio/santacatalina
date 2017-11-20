@@ -1,16 +1,19 @@
 window.ReadListOrdersComponent = React.createClass({
     getInitialState: function() {
         return {
-            orders: []
+            orders: [],
+            numberPage:0,
+            code:'',
+            totalPages:0
         };
     },
     
-    loadOrdersFromServer: function () {
+    loadOrdersFromServer: function (numberPage,code) {
 	    var self = this;
-	    if(this.props.code == '' ){
-	    		var url = "/api/orders?size=500000"
+	    if(code == '' ){
+	    		var url = "/api/orders?page="+numberPage+"&size=100"
 	    }else{
-	    		var url = "/api/orders/search/findByCodeContainingIgnoreCase?code="+this.props.code+"&size=500"
+	    		var url = "/api/orders/search/findByCodeContainingIgnoreCase?code="+code+"&size=100"
 	    }
 	    $.ajax({
 	    		type: "GET",
@@ -18,16 +21,29 @@ window.ReadListOrdersComponent = React.createClass({
 	      url: url
 	    }).then(function (data) {
 	      self.setState({orders: data._embedded.orders});
+	      if(code == '' ){
+	      	self.setState({totalPages: data.page.totalPages});
+	      }
 	    });
 	  },
  
     componentDidMount: function() {
-    		this.loadOrdersFromServer();
+    		this.loadOrdersFromServer(this.state.numberPage,this.state.code);
     },
     
-     componentDidUpdate: function () {
-      this.loadOrdersFromServer();
+     changeNumberPage: function(newNumberPage){
+        this.loadOrdersFromServer(newNumberPage, '');
+        this.setState({numberPage: newNumberPage});
+        this.setState({code: ''});
+        
     },
+    
+    changeCode: function(newCode){
+    		this.loadOrdersFromServer(this.state.numberPage,newCode);
+        this.setState({code: newCode});
+    },
+    
+    
  
     render: function() {
         // list of products
@@ -36,12 +52,15 @@ window.ReadListOrdersComponent = React.createClass({
  
         return (
             <div className='overflow-hidden'>
-                <SearchFiltered changeAppMode={this.props.changeAppMode} code={this.props.code}  changeCode={this.props.changeCode} />
+                <SearchFiltered changeAppMode={this.props.changeAppMode} code={this.state.code}  changeCode={this.changeCode} />
  				
                 <ListOrdersTable
                     listOrders={filteredListOrders}
                     changeAppMode={this.props.changeAppMode} />
-            </div>
+            	    
+            	    <Pagination numberPage={this.state.numberPage} totalPages={this.state.totalPages} changeNumberPage={this.changeNumberPage}/>
+              
+              </div> 
         );
     }
 });

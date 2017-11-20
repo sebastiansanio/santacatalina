@@ -51,7 +51,6 @@ var App = React.createClass({
     getInitialState: function(){
         return {
             currentMode: 'read',
-            code:'',
             items:[],
             orderId: null
         };
@@ -69,6 +68,7 @@ var App = React.createClass({
     changeCode: function(newCode){
         this.setState({code: newCode});
     },
+    
  
     // render the component based on current or selected mode
     render: function(){
@@ -80,7 +80,7 @@ var App = React.createClass({
                 modeComponent = <ReadOneListOrderComponent orderId={this.state.orderId} items={this.state.items} changeAppMode={this.changeAppMode}/>;
                 break;
             default:
-            		modeComponent =<ReadListOrdersComponent changeAppMode={this.changeAppMode} code={this.state.code} changeCode={this.changeCode} />;
+            		modeComponent =<ReadListOrdersComponent changeAppMode={this.changeAppMode} code={this.state.code}  changeCode={this.changeCode} />;
                 break;
         }
  

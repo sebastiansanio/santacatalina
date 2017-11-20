@@ -1,4 +1,6 @@
 window.ListOrdersTable = React.createClass({
+	
+	
     render: function() {
     var rows = this.props.listOrders.map(function(order, i) {
             return (
@@ -13,7 +15,9 @@ window.ListOrdersTable = React.createClass({
             !rows.length
                 ? <div className='alert alert-danger'>No se encontraron pedidos.</div>
                 :
-                <table className='table table-striped table-hover'>
+                	<div>
+                	<iframe id="txtArea1" style={{display:'none' }}></iframe>
+                <table className='table table-striped table-hover' id='headerTable'>
                     <thead>
                         <tr>
                             <th>Codigo</th>
@@ -28,6 +32,8 @@ window.ListOrdersTable = React.createClass({
                         {rows}
                     </tbody>
                 </table>
+                
+                </div>
         );
     }
 });

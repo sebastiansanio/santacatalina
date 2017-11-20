@@ -32,7 +32,6 @@ window.ListOrderRow = React.createClass({
             <td>{this.props.order.code}</td>
             <td>{!this.props.order.status ? 'Sin confirmar': 'Confirmado'}</td>
             <td>{this.props.order.items.length}</td>
-            <td style={{display:'none' }}>${this.props.order.items.reduce((a, b) => a + b.price+b.price, 0)}</td>
             <td><input 
 		    		type="checkbox" 
 		    		name="active"
