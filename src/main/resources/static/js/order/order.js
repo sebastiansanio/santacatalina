@@ -333,7 +333,7 @@ class Navbar extends React.Component {
         <nav className="navbar navbar-primary">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" href="#"><img height="50px" src="/assets/images/Logo enSantaCatalina-02.png" alt="Logo Ensantacatalina" />
+              <a className="navbar-brand" href="#"><img height="60px" src="/assets/images/lebron.png" alt="Logo" />
               </a>
             </div>
 
