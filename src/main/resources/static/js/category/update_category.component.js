@@ -4,6 +4,7 @@ window.UpdateCategoryComponent = React.createClass({
 	        id: 0,
 	        name: '',
 	        image:null,
+	        active:null,
 	        successUpdate: null
 	       
 	    };
@@ -18,6 +19,11 @@ window.UpdateCategoryComponent = React.createClass({
 		        success : function(category) {
 		        		this.setState({id: category.id});
 		            this.setState({name: category.name});
+		            if(category.active == true){
+            			document.getElementById("active").checked = true;
+		            }else{
+		            		document.getElementById("active").checked = false;
+		            }
 			        document.getElementById("ItemPreview").src = "data:image/png;base64," + category.image;
 		        }.bind(this),
 		        error: function(xhr, resp, text){
@@ -55,11 +61,20 @@ window.UpdateCategoryComponent = React.createClass({
 	    
 	},
 	
+	onActiveChange: function(e) {
+		if( $('#active').prop('checked') ) {
+			this.setState({active: true});
+		}else{
+			this.setState({active: false});
+		}
+	},
+	
 	onSave: function(e){
 		
 	    var form_data={
 	        id: this.state.id,
 	        name: this.state.name,
+	        active: this.state.active,
 	        image:document.getElementById("image").value
 	    };
 	    
@@ -134,6 +149,18 @@ window.UpdateCategoryComponent = React.createClass({
 	        	                	name="img"/>
                         </td>
                         </tr>
+                        
+                        <tr>
+                        <td>Habilitado</td>
+                        <td>
+                        <input 
+		                		type="checkbox" 
+		                		name="active"
+		                		id="active"
+		                		className='form-control'
+		                		onChange={this.onActiveChange}/>
+                        </td>
+                    </tr>
 	 
 	 
 	                    <tr>

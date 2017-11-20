@@ -8,7 +8,7 @@ window.ReadListOrdersComponent = React.createClass({
     loadOrdersFromServer: function () {
 	    var self = this;
 	    if(this.props.code == '' ){
-	    		var url = "/api/orders?size=500"
+	    		var url = "/api/orders?size=500000"
 	    }else{
 	    		var url = "/api/orders/search/findByCodeContainingIgnoreCase?code="+this.props.code+"&size=500"
 	    }

@@ -32,12 +32,13 @@ window.ListOrderRow = React.createClass({
             <td>{this.props.order.code}</td>
             <td>{!this.props.order.status ? 'Sin confirmar': 'Confirmado'}</td>
             <td>{this.props.order.items.length}</td>
+            <td style={{display:'none' }}>${this.props.order.items.reduce((a, b) => a + b.price+b.price, 0)}</td>
             <td><input 
 		    		type="checkbox" 
 		    		name="active"
 		    		id="active"
 		    		className='form-control'
-		    		defaultChecked={this.props.order.status}
+		    		checked={this.props.order.status}
 		    		onChange={this.onSave}/></td>
             <td>{this.props.order.date? this.props.order.date.substring(0,10): null}</td>
             <td>

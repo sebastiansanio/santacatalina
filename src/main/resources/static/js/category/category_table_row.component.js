@@ -4,7 +4,7 @@ window.CategoryRow = React.createClass({
     return (
         <tr>
             <td>{this.props.category.name}</td>
-            <td>{this.props.category.active}</td>
+            <td>{this.props.category.active ? 'Habilitado':'Deshabilitado'}</td>
             <td>
                 <a href='#'
                     onClick={() => this.props.changeAppMode('readOne', this.props.category.id)}

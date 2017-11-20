@@ -3,6 +3,7 @@ window.CreateCategoryComponent = React.createClass({
 	    return {
 	        name: '',
 	        image:null,
+	        active:null,
 	        successCreation: null
 	    };
 	},
@@ -26,12 +27,21 @@ window.CreateCategoryComponent = React.createClass({
 	    reader.readAsArrayBuffer(fileData)
 	    
 	},
+	
+	onActiveChange: function(e) {
+		if( $('#active').prop('checked') ) {
+			this.setState({active: true});
+		}else{
+			this.setState({active: false});
+		}
+	},
 	 
 	
 	onSave: function(e){
 	 
 	    var form_data={
 	        name: this.state.name,
+	        active: this.state.active,
 	        image:document.getElementById("image").value
 	    };
 	    
@@ -53,7 +63,7 @@ window.CreateCategoryComponent = React.createClass({
 	            console.log(xhr, resp, text);
 	        }
 	    });
-	    event.preventDefault();
+	    this.props.changeAppMode('read')
 	},
 	render: function() {
 		
@@ -110,6 +120,18 @@ window.CreateCategoryComponent = React.createClass({
 			                	name="img"/>
 		                </td>
 		            </tr>
+		            
+		            <tr>
+                    <td>Habilitado</td>
+                    <td>
+                    <input 
+	                		type="checkbox" 
+	                		name="active"
+	                		id="active"
+	                		className='form-control'
+	                		onChange={this.onActiveChange}/>
+                    </td>
+                </tr>
 	                
 	 
 	                <tr>
