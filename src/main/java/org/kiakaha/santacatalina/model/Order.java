@@ -1,5 +1,6 @@
 package org.kiakaha.santacatalina.model;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,8 @@ public class Order {
 	private long number;
 	private String table;
 	private String note;
+	private BigDecimal discount;
+	private BigDecimal totalAmount;
 	
 	private boolean status;
 	
@@ -93,6 +96,22 @@ public class Order {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public BigDecimal getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(BigDecimal discount) {
+		this.discount = discount;
+	}
+
+	public BigDecimal getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(BigDecimal totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 
 }
