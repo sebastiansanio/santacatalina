@@ -33,8 +33,8 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.orderItemRepository = orderItemRepository;
 	}
 
-	@Override
-	public void run(String... strings) throws Exception {
+	
+	public void startSantaCatalina() {
 		byte[] a2 = new byte[1];
 		Category categorySalad = new Category("Ensalada", true,a2);
 		this.categoryRepository.save(categorySalad);
@@ -135,6 +135,55 @@ public class DataBaseLoader implements CommandLineRunner {
 			order.setItems(listItems);
 			this.orderRepository.save(order);
 		}
+	}
+	
+	public void startLebron() {
+		byte[] a2 = new byte[1];
+		Category category1 = new Category("Para picar", true,a2);
+		this.categoryRepository.save(category1);
+		this.productRepository.save(new Product("Papas bravas", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
+		this.productRepository.save(new Product("Papas alioli", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
+		this.productRepository.save(new Product("Papas con cheddar, panceta y verdeo", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
+		this.productRepository.save(new Product("Nachos con cheddar", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
+		
+		Category category2 = new Category("Panchos frankfurte", true,a2);
+		this.categoryRepository.save(category2);
+		this.productRepository.save(new Product("Cleveland", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
+		this.productRepository.save(new Product("París", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
+		this.productRepository.save(new Product("Munich", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
+		this.productRepository.save(new Product("Lebron", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
 
+		Category category3 = new Category("Hamburguesas", true,a2);
+		this.categoryRepository.save(category3);
+		this.productRepository.save(new Product("King James", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
+		this.productRepository.save(new Product("El Niño", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
+		this.productRepository.save(new Product("Juan Lopez", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
+		this.productRepository.save(new Product("Gilipollas", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
+		this.productRepository.save(new Product("El chapo", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
+		this.productRepository.save(new Product("Rochen", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
+		this.productRepository.save(new Product("Berlusconi", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
+		this.productRepository.save(new Product("A lo ministro", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
+
+		
+		
+		for(int i =0 ; i<100 ; i++) {
+			List<OrderItem> listItems = new ArrayList<OrderItem>();
+			Order order = new Order("IV"+i,false,new Date(),i);
+			this.orderRepository.save(order);
+			for(int j = 0 ; j< 4; j++) {
+				Product product = this.productRepository.findAll().iterator().next();
+				OrderItem orderItem = new OrderItem(BigDecimal.valueOf(1.00),product.getPrice(),product.getName(),order);
+				this.orderItemRepository.save(orderItem);
+				listItems.add(orderItem);
+			}
+			order.setItems(listItems);
+			this.orderRepository.save(order);
+		}
+	}
+	
+	@Override
+	public void run(String... strings) throws Exception {
+
+		startLebron();
 	}
 }

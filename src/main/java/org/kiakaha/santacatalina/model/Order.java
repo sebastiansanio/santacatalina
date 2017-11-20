@@ -27,6 +27,9 @@ public class Order {
 	private String code;
 	private Date date;
 	private long number;
+	private String table;
+	private String note;
+	
 	private boolean status;
 	
 	public Order() {
@@ -75,5 +78,21 @@ public class Order {
 	public void setStatus(boolean status) {
 		this.status = status;
 	}
-	
+
+	public String getTable() {
+		return table;
+	}
+
+	public void setTable(String table) {
+		this.table = table;
+	}
+
+	public String getNote() {
+		return note;
+	}
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
 }
