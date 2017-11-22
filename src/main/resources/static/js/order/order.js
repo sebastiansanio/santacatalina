@@ -190,7 +190,7 @@ class OrderButton extends React.Component {
 class ConfirmModal extends React.Component {
 	constructor(props){
 		super(props)
-		this.state = {cartItems: props.cartItems, code: '', discount: props.discount}
+		this.state = {cartItems: props.cartItems, code: '', table: '', note: '',discount: props.discount}
 		this.confirm = this.confirm.bind(this);
 	}
 	componentWillReceiveProps(props){
@@ -199,11 +199,12 @@ class ConfirmModal extends React.Component {
 	confirm(){
 		var order = new Object();
 		order.code = this.state.code
+		order.table = this.state.table
+		order.note = this.state.note
 		order.items = []
    		this.state.cartItems.map((item) => {
    			var orderItem = new Object()
-   			orderItem.product = item.product
-   			orderItem.price = item.product.price
+   			orderItem.product = item.product.id
    			orderItem.quantity = item.quantity
    			order.items.push(orderItem)
         })
@@ -212,6 +213,12 @@ class ConfirmModal extends React.Component {
 	}
 	onCodeChange(event){
 		this.setState({code: event.target.value})
+	}
+	onTableChange(event){
+		this.setState({table: event.target.value})
+	}
+	onNoteChange(event){
+		this.setState({note: event.target.value})
 	}
 	render(){
 		return(
@@ -225,8 +232,16 @@ class ConfirmModal extends React.Component {
 		      </div>
 		      <div className="modal-body row">
 		      	<div className="form-inline form-group">
-	      			<label htmlFor="code"> Iniciales: </label>
+	      			<label htmlFor="code">Iniciales: </label>
 	      			<input required="required" onChange={this.onCodeChange.bind(this)} id="code" className="form-control" type="string" name="code" value={this.state.code} />
+	      		</div>
+		      	<div className="form-inline form-group">
+	      			<label htmlFor="table">Mesa: </label>
+	      			<input required="required" onChange={this.onTableChange.bind(this)} id="table" className="form-control" type="string" name="table" value={this.state.table} />
+	      		</div>
+			    <div className="form-inline form-group">
+	      			<label htmlFor="note">Observaciones: </label>
+	      			<input required="required" onChange={this.onNoteChange.bind(this)} id="note" className="form-control" type="string" name="note" value={this.state.note} />
 	      		</div>
 
 		      	{
@@ -333,7 +348,7 @@ class Navbar extends React.Component {
         <nav className="navbar navbar-primary">
           <div className="container-fluid">
             <div className="navbar-header">
-              <a className="navbar-brand" href="#"><img height="50px" src="/assets/images/Logo enSantaCatalina-02.png" alt="Logo Ensantacatalina" />
+              <a className="navbar-brand" href="#"><img height="60px" src="/assets/images/lebron.png" alt="Logo" />
               </a>
             </div>
 
