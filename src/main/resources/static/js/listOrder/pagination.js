@@ -19,6 +19,7 @@ window.Pagination = React.createClass({
     	if(this.props.numberPage < 10){
     		i=20
     	}else{
+    		
     		j=this.props.numberPage - 10
     		i=this.props.numberPage + 10
     	}
