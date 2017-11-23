@@ -4,7 +4,7 @@ window.ReadListOrdersComponent = React.createClass({
             orders: [],
             numberPage:0,
             code:'',
-            totalPages:0
+            totalElements:0
         };
     },
     
@@ -22,7 +22,7 @@ window.ReadListOrdersComponent = React.createClass({
 	    }).then(function (data) {
 	      self.setState({orders: data._embedded.orders});
 	      if(code == '' ){
-	      	self.setState({totalPages: data.page.totalPages});
+	      	self.setState({totalElements: data.page.totalElements});
 	      }
 	    });
 	  },
@@ -53,13 +53,15 @@ window.ReadListOrdersComponent = React.createClass({
         return (
             <div className='overflow-hidden'>
                 <SearchFiltered changeAppMode={this.props.changeAppMode} code={this.state.code}  changeCode={this.changeCode} />
+	        		
  				
                 <ListOrdersTable
                     listOrders={filteredListOrders}
                     changeAppMode={this.props.changeAppMode} />
             	    
-            	    <Pagination numberPage={this.state.numberPage} totalPages={this.state.totalPages} changeNumberPage={this.changeNumberPage}/>
+            	    <Pagination numberPage={this.state.numberPage}  totalElements={this.state.totalElements} changeNumberPage={this.changeNumberPage}/>
               
+	        		<a href="export/excel">Descarga excel</a>
               </div> 
         );
     }

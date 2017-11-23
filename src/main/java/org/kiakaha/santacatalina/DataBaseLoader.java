@@ -166,7 +166,7 @@ public class DataBaseLoader implements CommandLineRunner {
 
 		
 		
-		for(int i =0 ; i<100 ; i++) {
+		for(int i =0 ; i<3000 ; i++) {
 			List<OrderItem> listItems = new ArrayList<OrderItem>();
 			Order order = new Order("IV"+i,false,new Date(),i);
 			this.orderRepository.save(order);
