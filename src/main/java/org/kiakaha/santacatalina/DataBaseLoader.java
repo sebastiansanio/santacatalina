@@ -8,10 +8,12 @@ import java.util.List;
 import org.kiakaha.santacatalina.model.Category;
 import org.kiakaha.santacatalina.model.Order;
 import org.kiakaha.santacatalina.model.OrderItem;
+import org.kiakaha.santacatalina.model.Parameter;
 import org.kiakaha.santacatalina.model.Product;
 import org.kiakaha.santacatalina.repositories.CategoryRepository;
 import org.kiakaha.santacatalina.repositories.OrderItemRepository;
 import org.kiakaha.santacatalina.repositories.OrderRepository;
+import org.kiakaha.santacatalina.repositories.ParameterRepository;
 import org.kiakaha.santacatalina.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -24,13 +26,16 @@ public class DataBaseLoader implements CommandLineRunner {
 	private final CategoryRepository categoryRepository;
 	private final OrderRepository orderRepository;
 	private final OrderItemRepository orderItemRepository;
+	private final ParameterRepository parameterRepository;
 
 	@Autowired
-	public DataBaseLoader(OrderItemRepository orderItemRepository,ProductRepository productRepository, CategoryRepository categoryRepository,OrderRepository orderRepository) {
+	public DataBaseLoader(OrderItemRepository orderItemRepository,ProductRepository productRepository, 
+			CategoryRepository categoryRepository,OrderRepository orderRepository, ParameterRepository parameterRepository) {
 		this.productRepository = productRepository;
 		this.categoryRepository = categoryRepository;
 		this.orderRepository = orderRepository;
 		this.orderItemRepository = orderItemRepository;
+		this.parameterRepository = parameterRepository;
 	}
 
 	
@@ -123,6 +128,7 @@ public class DataBaseLoader implements CommandLineRunner {
 		this.productRepository.save(new Product("PDT Pomelo free", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks,a2));
 		this.productRepository.save(new Product("Agua con Gas", BigDecimal.valueOf(40.00), "", true, false, categoryDrinks,a2));
 		
+		
 		for(int i =0 ; i<100 ; i++) {
 			List<OrderItem> listItems = new ArrayList<OrderItem>();
 			Order order = new Order("IV"+i,false,new Date(),i);
@@ -178,7 +184,7 @@ public class DataBaseLoader implements CommandLineRunner {
 			this.productRepository.save(new Product("Agua", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
 			this.productRepository.save(new Product("Agua con gas", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
 			this.productRepository.save(new Product("Café", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
-		
+			this.parameterRepository.save(new Parameter("PRINTER_PORT","/dev/ttyUSB0"));
 			
 			for(int i =0 ; i<3000 ; i++) {
 				List<OrderItem> listItems = new ArrayList<OrderItem>();

@@ -31,7 +31,7 @@ public class PrinterController {
 			printerService.print(order);
 			return true;
 		} catch (Exception e) {
-			LOGGER.error("Error en impresión de pedidop", e);
+			LOGGER.error("Error en impresión de pedido", e);
 		}
 		return false;
 

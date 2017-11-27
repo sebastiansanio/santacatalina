@@ -1,19 +1,19 @@
 package org.kiakaha.santacatalina.model;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
 public class Parameter {
 	
+	@Id
 	private String key;
 	private String value;
 	
-	@Id
-	@GeneratedValue
-	private Long id;
-	
+	public Parameter(String key, String value) {
+		this.key = key;
+		this.value = value;
+	}
 	
 	public String getKey() {
 		return key;
@@ -27,11 +27,9 @@ public class Parameter {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
+
+	public Parameter() {
+		super();
 	}
 	
 }
