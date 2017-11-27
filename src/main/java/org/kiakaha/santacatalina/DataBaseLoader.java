@@ -138,46 +138,61 @@ public class DataBaseLoader implements CommandLineRunner {
 	}
 	
 	public void startLebron() {
-		byte[] a2 = new byte[1];
-		Category category1 = new Category("Para picar", true,a2);
-		this.categoryRepository.save(category1);
-		this.productRepository.save(new Product("Papas bravas", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
-		this.productRepository.save(new Product("Papas alioli", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
-		this.productRepository.save(new Product("Papas con cheddar, panceta y verdeo", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
-		this.productRepository.save(new Product("Nachos con cheddar", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
 		
-		Category category2 = new Category("Panchos frankfurte", true,a2);
-		this.categoryRepository.save(category2);
-		this.productRepository.save(new Product("Cleveland", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
-		this.productRepository.save(new Product("París", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
-		this.productRepository.save(new Product("Munich", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
-		this.productRepository.save(new Product("Lebron", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
-
-		Category category3 = new Category("Hamburguesas", true,a2);
-		this.categoryRepository.save(category3);
-		this.productRepository.save(new Product("King James", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
-		this.productRepository.save(new Product("El Niño", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
-		this.productRepository.save(new Product("Juan Lopez", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
-		this.productRepository.save(new Product("Gilipollas", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
-		this.productRepository.save(new Product("El chapo", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
-		this.productRepository.save(new Product("Rochen", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
-		this.productRepository.save(new Product("Berlusconi", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
-		this.productRepository.save(new Product("A lo ministro", BigDecimal.valueOf(45.00), "", true, false, category3,a2));
-
+		if(this.categoryRepository.count()==0) {
 		
+			byte[] a2 = new byte[1];
+			Category category1 = new Category("Para picar", true,a2);
+			this.categoryRepository.save(category1);
+			this.productRepository.save(new Product("Papas bravas", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
+			this.productRepository.save(new Product("Papas alioli", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
+			this.productRepository.save(new Product("Papas con cheddar, panceta y verdeo", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
+			this.productRepository.save(new Product("Nachos con cheddar", BigDecimal.valueOf(90.00), "", true, false, category1,a2));
+			
+			Category category2 = new Category("Panchos frankfurte", true,a2);
+			this.categoryRepository.save(category2);
+			this.productRepository.save(new Product("Cleveland", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
+			this.productRepository.save(new Product("París", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
+			this.productRepository.save(new Product("Munich", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
+			this.productRepository.save(new Product("Lebron", BigDecimal.valueOf(80.00), "", true, false, category2,a2));
+	
+			Category category3 = new Category("Hamburguesas", true,a2);
+			this.categoryRepository.save(category3);
+			this.productRepository.save(new Product("King James", BigDecimal.valueOf(110.00), "", true, false, category3,a2));
+			this.productRepository.save(new Product("El Niño", BigDecimal.valueOf(110.00), "", true, false, category3,a2));
+			this.productRepository.save(new Product("Juan Lopez", BigDecimal.valueOf(110.00), "", true, false, category3,a2));
+			this.productRepository.save(new Product("Gilipollas", BigDecimal.valueOf(110.00), "", true, false, category3,a2));
+			this.productRepository.save(new Product("El chapo", BigDecimal.valueOf(110.00), "", true, false, category3,a2));
+			this.productRepository.save(new Product("Rochen", BigDecimal.valueOf(110.00), "", true, false, category3,a2));
+			this.productRepository.save(new Product("Berlusconi", BigDecimal.valueOf(110.00), "", true, false, category3,a2));
+			this.productRepository.save(new Product("A lo ministro", BigDecimal.valueOf(110.00), "", true, false, category3,a2));
+	
+			Category category4 = new Category("Bebidas", true,a2);
+			this.categoryRepository.save(category4);
+			this.productRepository.save(new Product("Pinta de cerveza", BigDecimal.valueOf(90.00), "", true, false, category4,a2));
+			this.productRepository.save(new Product("Refill cerveza", BigDecimal.valueOf(60.00), "", true, false, category4,a2));
+			this.productRepository.save(new Product("Trago", BigDecimal.valueOf(120.00), "", true, false, category4,a2));
+			this.productRepository.save(new Product("Coca Cola", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
+			this.productRepository.save(new Product("Coca Cola light", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
+			this.productRepository.save(new Product("Sprite", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
+			this.productRepository.save(new Product("Agua", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
+			this.productRepository.save(new Product("Agua con gas", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
+			this.productRepository.save(new Product("Café", BigDecimal.valueOf(50.00), "", true, false, category4,a2));
 		
-		for(int i =0 ; i<3000 ; i++) {
-			List<OrderItem> listItems = new ArrayList<OrderItem>();
-			Order order = new Order("IV"+i,false,new Date(),i);
-			this.orderRepository.save(order);
-			for(int j = 0 ; j< 4; j++) {
-				Product product = this.productRepository.findAll().iterator().next();
-				OrderItem orderItem = new OrderItem(BigDecimal.valueOf(1.00),product.getPrice(),product.getName(),order);
-				this.orderItemRepository.save(orderItem);
-				listItems.add(orderItem);
+			
+			for(int i =0 ; i<3000 ; i++) {
+				List<OrderItem> listItems = new ArrayList<OrderItem>();
+				Order order = new Order("IV"+i,false,new Date(),i);
+				this.orderRepository.save(order);
+				for(int j = 0 ; j< 4; j++) {
+					Product product = this.productRepository.findAll().iterator().next();
+					OrderItem orderItem = new OrderItem(BigDecimal.valueOf(1.00),product.getPrice(),product.getName(),order);
+					this.orderItemRepository.save(orderItem);
+					listItems.add(orderItem);
+				}
+				order.setItems(listItems);
+				this.orderRepository.save(order);
 			}
-			order.setItems(listItems);
-			this.orderRepository.save(order);
 		}
 	}
 	

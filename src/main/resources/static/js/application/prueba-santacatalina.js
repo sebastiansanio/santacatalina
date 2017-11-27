@@ -34,7 +34,7 @@ var Footer = React.createClass({
             <footer>
                 <div className="row">
                     <div className="col-md-6 text-left">
-                        <p>&copy; Lebron 2017</p>
+                        <p>&copy; Santa Catalina 2017</p>
                     </div>
                 </div>
             </footer>
@@ -78,8 +78,26 @@ var Home = React.createClass({
             <div>
                 <div className="jumbotron">
                     <div className="container">
-                        <h1>Lebron</h1>
+                        <h1>Santa Catalina</h1>
+                        <p>Nuestro compromiso es hacer comida sana y accesible para todos
+Nos gusta incorporar la mayor cantidad de alimentos orgánicos posibles apoyando a productores locales, nuestros propios cultivos y cooperativas
+Nos gusta compartir con ustedes las últimas tendencias en comida sana y estilos de vida saludables
+Nos encanta comer, comida de verdad.</p>
                     </div>
+                </div>
+                <div className="container">
+                     <div className="row">
+                         <div className="col-md-6">
+                             <h2>Comida</h2>
+                             <p>Entendemos que la comida tiene un rol muy importante en nuestra salud y nuestro estado de vida en general.
+Nuestra propuesta está vinculada con llevar comida rica, casera y saludable a nuestros clientes. Como objetivo queremos mostrarles que la comida sana y rica puede estar en un mismo plato. Cocinamos de la manera que vos cocinarías si tuvieras más tiempo, un jardín, una cocina grande y un chef profesional.
+Para garantizar que nuestros clientes siempre pueden tener variedad de opciones hacemos un plato del día diferente y lo complementamos con variedades de sándwiches calientes y fríos, ensaladas, tartas y wraps. Ofrecemos variedad de jugos naturales, sanos y frescos del día. Nuestros postres y cosas dulces son un mimo para el goloso que todos llevamos dentro.
+                             </p>                         
+                             </div>
+                         <div className="col-md-6">
+                             <h2>Ubicación</h2>
+                             <p>Nos encontramos en San Martin 705 y Viamente, Capital Federal</p>                         </div>
+                     </div>
                 </div>
             </div>
         );

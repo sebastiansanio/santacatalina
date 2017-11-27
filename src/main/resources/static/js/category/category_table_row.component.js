@@ -8,11 +8,11 @@ window.CategoryRow = React.createClass({
             <td>
                 <a href='#'
                     onClick={() => this.props.changeAppMode('readOne', this.props.category.id)}
-                    className='btn btn-info m-r-1em'> Read One
+                    className='btn btn-info m-r-1em'> Ver
                 </a>
                 <a href='#'
                     onClick={() => this.props.changeAppMode('update', this.props.category.id)}
-                    className='btn btn-primary m-r-1em'> Edit
+                    className='btn btn-primary m-r-1em'> Editar
                 </a>
             </td>
         </tr>
